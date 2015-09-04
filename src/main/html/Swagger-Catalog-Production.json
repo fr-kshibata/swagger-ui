@@ -4,7 +4,11 @@
     "version": "v1",
     "title": "Catalog Component",
     "description": "http://itwiki.g1.frgroup/display/DM/Catalog+Platform",
-    "contact": "kristian.faeldt@fastretailing.com"
+    "contact": {
+      "name": "Catalog PF Team",
+      "url": "http://itwiki.g1.frgroup/display/DM/Catalog+Platform",
+      "email": "kristian.faeldt@fastretailing.com"
+    }
   },
   "host": "api.fastretailing.com",
   "basePath": "/catalog",
@@ -44,6 +48,14 @@
       "type": "string",
       "required": true,
       "default": "mobileweb"
+    },
+    "locale": {
+      "in": "query",
+      "name": "locale",
+      "description": "Locale",
+      "type": "string",
+      "required": false,
+      "default": "ja"
     }
   },
   "paths": {
@@ -58,6 +70,9 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
           }
         ]
       }
@@ -73,6 +88,57 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
+          },
+          {
+            "in": "query",
+            "name": "productID",
+            "description": "L1 Code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineID",
+            "description": "PUB Code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sku",
+            "description": "SKU(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "plu",
+            "description": "PLU(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Limit",
+            "type": "integer",
+            "required": false,
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 50
+          },
+          {
+            "in": "query",
+            "name": "start",
+            "description": "Initial offset",
+            "type": "integer",
+            "required": false,
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000            
           }
         ]
       }
@@ -88,6 +154,9 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
           }
         ]
       }
@@ -103,6 +172,9 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
           }
         ]
       }
