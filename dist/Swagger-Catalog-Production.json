@@ -4,7 +4,11 @@
     "version": "v1",
     "title": "Catalog Component",
     "description": "http://itwiki.g1.frgroup/display/DM/Catalog+Platform",
-    "contact": "kristian.faeldt@fastretailing.com"
+    "contact": {
+      "name": "Catalog PF Team",
+      "url": "http://itwiki.g1.frgroup/display/DM/Catalog+Platform",
+      "email": "kristian.faeldt@fastretailing.com"
+    }
   },
   "host": "api.fastretailing.com",
   "basePath": "/catalog",
@@ -44,11 +48,47 @@
       "type": "string",
       "required": true,
       "default": "mobileweb"
+    },
+    "locale": {
+      "in": "query",
+      "name": "locale",
+      "description": "Locale",
+      "type": "string",
+      "required": false,
+      "default": "ja"
+    },
+    "query": {
+      "in": "query",
+      "name": "count",
+      "description": "Limit (1-50, 10 if not specified)",
+      "type": "integer",
+      "required": false,
+      "format": "int32"
+    },
+    "start": {
+      "in": "query",
+      "name": "start",
+      "description": "Initial offset (<= 1000)",
+      "type": "integer",
+      "required": false,
+      "format": "int32"
+    },
+    "q": {
+      "in": "query",
+      "name": "q",
+      "description": "Full-text search query",
+      "type": "string",
+      "required": false
     }
   },
   "paths": {
     "/v1/{brand}/{region}/item/detail": {
       "get": {
+        "responses": {
+          "200": {
+            "description": "Item details"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/brand"
@@ -58,12 +98,48 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
+          },
+          {
+            "in": "query",
+            "name": "productID",
+            "description": "L1 Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineID",
+            "description": "PUB Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sku",
+            "description": "SKU",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "plu",
+            "description": "PLU",
+            "type": "string",
+            "required": false
           }
         ]
       }
     },
     "/v1/{brand}/{region}/item/list": {
       "get": {
+        "responses": {
+          "200": {
+            "description": "Item list"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/brand"
@@ -73,12 +149,54 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "in": "query",
+            "name": "productID",
+            "description": "L1 Code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineID",
+            "description": "PUB Code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sku",
+            "description": "SKU(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "plu",
+            "description": "PLU(s)",
+            "type": "string",
+            "required": false
           }
         ]
       }
     },
     "/v1/{brand}/{region}/item/search": {
       "get": {
+        "responses": {
+          "200": {
+            "description": "Search results"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/brand"
@@ -88,12 +206,115 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "$ref": "#/parameters/q"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sort Field",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "online",
+              "score",
+              "price"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "Sort Order",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "asc",
+              "desc"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "color",
+            "description": "Color(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "colorCode",
+            "description": "Color code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "description": "Size(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sizeCode",
+            "description": "Size code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "length",
+            "description": "Length(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "lengthCode",
+            "description": "Length code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "description": "3-letter IMS category(ies)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineCategory",
+            "description": "EC System Category(ies)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "inStock",
+            "description": "Only return products that are in stock",
+            "type": "boolean",
+            "required": false
           }
         ]
       }
     },
     "/v1/{brand}/{region}/review/search": {
       "get": {
+        "responses": {
+          "200": {
+            "description": "Search results"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/brand"
@@ -103,6 +324,43 @@
           },
           {
             "$ref": "#/parameters/clientid"
+          },
+          {
+            "$ref": "#/parameters/locale"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "$ref": "#/parameters/q"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sort Field",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "createdAt",
+              "score"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "productID",
+            "description": "L1 Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineID",
+            "description": "PUB Code",
+            "type": "string",
+            "required": false
           }
         ]
       }
