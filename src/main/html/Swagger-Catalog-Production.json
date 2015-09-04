@@ -1,0 +1,53 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Catalog Component",
+    "description": "http://itwiki.g1.frgroup/display/DM/Catalog+Platform",
+    "contact": "kristian.faeldt@fastretailing.com"
+  },
+  "host": "api.fastretailing.com",
+  "basePath": "/catalog/",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "parameters": [
+    {
+      "name": "brand",
+      "in": "path",
+      "description": "Brand",
+      "type": "String",
+      "required": true,
+      "default": "uq",
+      "enum": [
+        "uq",
+        "gu"
+      ]
+    },
+    {
+      "name": "region",
+      "in": "path",
+      "description": "Region",
+      "type": "String",
+      "required": true,
+      "default": "jp",
+      "enum": [
+        "jp"        
+      ]
+    }
+  ],
+  "paths": {
+    "/v1/{brand}/{region}/item/detail": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/brand"
+          },
+          {
+            "$ref": "#/parameters/region"
+          }
+        ]
+      }
+    }
+  }
+}
