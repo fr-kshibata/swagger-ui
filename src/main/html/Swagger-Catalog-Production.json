@@ -56,7 +56,32 @@
       "type": "string",
       "required": false,
       "default": "ja"
-    }
+    },
+    "query": {
+      "in": "query",
+      "name": "count",
+      "description": "Limit (1-50, 10 if not specified)",
+      "type": "integer",
+      "required": false,
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 50
+    },
+    "start": {
+      "in": "query",
+      "name": "start",
+      "description": "Initial offset (<= 1000)",
+      "type": "integer",
+      "required": false,
+      "format": "int32"
+    },
+    "q": {
+      "in": "query",
+      "name": "q",
+      "description": "Full-text search query",
+      "type": "string",
+      "required": false
+    },
   },
   "paths": {
     "/v1/{brand}/{region}/item/detail": {
@@ -73,6 +98,34 @@
           },
           {
             "$ref": "#/parameters/locale"
+          },
+          {
+            "in": "query",
+            "name": "productID",
+            "description": "L1 Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineID",
+            "description": "PUB Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sku",
+            "description": "SKU",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "plu",
+            "description": "PLU",
+            "type": "string",
+            "required": false
           }
         ]
       }
@@ -91,6 +144,12 @@
           },
           {
             "$ref": "#/parameters/locale"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/count"
           },
           {
             "in": "query",
@@ -119,26 +178,6 @@
             "description": "PLU(s)",
             "type": "string",
             "required": false
-          },
-          {
-            "in": "query",
-            "name": "count",
-            "description": "Limit",
-            "type": "integer",
-            "required": false,
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 50
-          },
-          {
-            "in": "query",
-            "name": "start",
-            "description": "Initial offset",
-            "type": "integer",
-            "required": false,
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000            
           }
         ]
       }
@@ -157,6 +196,101 @@
           },
           {
             "$ref": "#/parameters/locale"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "$ref": "#/parameters/q"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sort Field",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "online",
+              "score",
+              "price"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "description": "Sort Order",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "asc",
+              "desc"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "color",
+            "description": "Color(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "colorCode",
+            "description": "Color code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "size",
+            "description": "Size(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "sizeCode",
+            "description": "Size code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "length",
+            "description": "Length(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "lengthCode",
+            "description": "Length code(s)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "description": "3-letter IMS category(ies)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineCategory",
+            "description": "EC System Category(ies)",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "inStock",
+            "description": "Only return products that are in stock",
+            "type": "boolean",
+            "required": false
           }
         ]
       }
@@ -175,6 +309,40 @@
           },
           {
             "$ref": "#/parameters/locale"
+          },
+          {
+            "$ref": "#/parameters/start"
+          },
+          {
+            "$ref": "#/parameters/count"
+          },
+          {
+            "$ref": "#/parameters/q"
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "description": "Sort Field",
+            "type": "string",
+            "required": false,
+            "enum": [
+              "createdAt",
+              "score"
+            ]
+          },
+          {
+            "in": "query",
+            "name": "productID",
+            "description": "L1 Code",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "onlineID",
+            "description": "PUB Code",
+            "type": "string",
+            "required": false
           }
         ]
       }
