@@ -7,16 +7,17 @@
     "contact": "kristian.faeldt@fastretailing.com"
   },
   "host": "api.fastretailing.com",
-  "basePath": "/catalog/",
+  "basePath": "/catalog",
   "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "parameters": [
+  "parameters": {
+    "brand":
     {
       "name": "brand",
       "in": "path",
       "description": "Brand",
-      "type": "String",
+      "type": "string",
       "required": true,
       "default": "uq",
       "enum": [
@@ -24,18 +25,27 @@
         "gu"
       ]
     },
+    "region":
     {
       "name": "region",
       "in": "path",
       "description": "Region",
-      "type": "String",
+      "type": "string",
       "required": true,
       "default": "jp",
       "enum": [
-        "jp"        
+        "jp"
       ]
+    },
+    "clientid": {
+      "name": "clientID",
+      "in": "query",
+      "description": "Client ID",
+      "type": "string",
+      "required": true,
+      "default": "mobileweb"
     }
-  ],
+  },
   "paths": {
     "/v1/{brand}/{region}/item/detail": {
       "get": {
@@ -45,6 +55,54 @@
           },
           {
             "$ref": "#/parameters/region"
+          },
+          {
+            "$ref": "#/parameters/clientid"
+          }
+        ]
+      }
+    },
+    "/v1/{brand}/{region}/item/list": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/brand"
+          },
+          {
+            "$ref": "#/parameters/region"
+          },
+          {
+            "$ref": "#/parameters/clientid"
+          }
+        ]
+      }
+    },
+    "/v1/{brand}/{region}/item/search": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/brand"
+          },
+          {
+            "$ref": "#/parameters/region"
+          },
+          {
+            "$ref": "#/parameters/clientid"
+          }
+        ]
+      }
+    },
+    "/v1/{brand}/{region}/review/search": {
+      "get": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/brand"
+          },
+          {
+            "$ref": "#/parameters/region"
+          },
+          {
+            "$ref": "#/parameters/clientid"
           }
         ]
       }
