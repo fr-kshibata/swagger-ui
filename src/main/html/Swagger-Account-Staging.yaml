@@ -6,12 +6,13 @@
 # Code completion support is available so start typing for available options.
 swagger: '2.0'
 
-host: 52.74.183.81
+host: stage-api.fastretailing.com
+# schemes: "https"
 
 # This is your document metadata
 info:
   version: "0.0.0"
-  title: Account PF
+  title: Account PF (Staging)
 
 # Describe your paths here
 paths:
