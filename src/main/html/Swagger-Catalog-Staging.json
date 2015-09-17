@@ -10,7 +10,7 @@
       "email": "kristian.faeldt@fastretailing.com,wenyuan.jiang@fastretailing.com"
     }
   },
-  "host": "api.fastretailing.com",
+  "host": "stage-api.fastretailing.com",
   "basePath": "/catalog",
   "schemes": ["https"],
   "consumes": ["application/json"],
