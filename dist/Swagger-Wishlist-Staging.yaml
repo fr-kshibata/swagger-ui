@@ -1,0 +1,594 @@
+---
+  swagger: "2.0"
+  info:
+    version: "v1"
+    title: "Wishlist Component"
+    description: "http://itwiki.g1.frgroup/display/DM/20-19.+Wishlist+PF"
+    contact:
+      name: "Wishlist PF Team"
+      url: "http://itwiki.g1.frgroup/display/DM/03.+APIs"
+      email: "kristian.faeldt@fastretailing.com"
+  host: "api.fastretailing.com"
+  basePath: "/wishlist"
+  schemes:
+    - "https"
+  consumes:
+    - "application/json"
+  produces:
+    - "application/json"
+  parameters:
+    type:
+      name: "type"
+      in: "path"
+      description: "Either items or styles wishlist"
+      type: "string"
+      required: true
+      default: "items"
+      enum:
+        - "items"
+        - "styles"
+    wishlistId:
+      name: "wishlistId"
+      in: "path"
+      description: "Identifies the wishlist"
+      type: "string"
+      required: true
+      default: "0000000000000"
+    destWishlistId:
+      name: "wishlistId"
+      in: "query"
+      description: "Identifies the destination wishlist"
+      type: "string"
+      required: true
+      default: "0000000000000"
+    wishlistName:
+      name: "wishlistName"
+      description: "The name of the wishlist"
+      in: "path"
+      type: "string"
+      required: true
+      default: "Wishlist1"
+    checkType:
+      name: "checkType"
+      description: "outputs true if the types are the same and false if not"
+      in: "query"
+      type: "string"
+      required: true
+      default: "true"
+      enum:
+        - "true"
+        - "false"
+    accessToken:
+      name: "accessToken"
+      in: "path"
+      description: "Identifies the user"
+      type: "string"
+      required: true
+      default: "00000000000000"
+    itemId:
+      in: "path"
+      name: "itemId"
+      description: "identifies the items"
+      type: "string"
+      default: "1234"
+      required: true
+    listItemId:
+      in: "query"
+      name: "itemId"
+      description: "identifies the items"
+      type: "array"
+      format: "string"
+      required: true
+      default: ["123456789","45325","532653463","54325"]
+    styleId:
+      in: "path"
+      name: "styleId"
+      description: "identifies the styles"
+      type: "string"
+      default: "4321"
+      required: true
+    listStyleId:
+      in: "path"
+      name: "styleId"
+      description: "identifies the styles"
+      type: "array"
+      format: "string"
+      required: true
+      default: ["45325","532653463"]
+    items:
+      in: "query"
+      name: "items"
+      description: "items inside the wishlist"
+      type: "array"
+      format: "string"
+      required: false
+      default: ["brownshoes","black shoes","red shoes","horse shoes"]
+    styles:
+      in: "query"
+      name: "styles"
+      description: "styles inside the wishlist"
+      type: "array"
+      format: "string"
+      required: false
+      default: ["autumn","spring"]
+    sort:
+      in: "query"
+      name: "sort"
+      description: "sort the display"
+      type: "string"
+      required: true
+      default: "latest"
+      enum:
+        - "latest"
+        - "oldest"
+    filter:
+      in: "query"
+      name: "filter"
+      description: "filter the display"
+      type: "string"
+      required: false
+      default: "none"
+      enum:
+        - "color:red"
+        - "color:blue"
+        - "color:green"
+        - "size:XL"
+        - "size:L"
+    styleFilter:
+      in: "query"
+      name: "filter"
+      description: "filter the display"
+      type: "string"
+      required: false
+      default: "none"
+      enum:
+        - "all-color:red"
+        - "all-color:blue"
+        - "all-color:green"
+        - "at-least-one:red"
+        - "at-least-one:blue"
+        - "at-least-one:green"
+        - "dont-have:red"
+        - "dont-have:blue"
+        - "dont-have:green"
+        - "all-size-have:XL"
+        - "all-size-have:L"
+        - "at-least-one:XL"
+        - "at-least-one:L"
+        - "dont-have:XL"
+        - "dont-have:L"
+    q:
+      in: "query"
+      name: "q"
+      description: "Full-text search query"
+      type: "string"
+      required: false
+    memoId:
+      in: "path"
+      name: "memoId"
+      description: "Memo for individual item or style"
+      type: "string"
+      required: false
+      default: "none"
+    commentId:
+      in: "path"
+      name: "commentId"
+      description: "Comment for the entire wishlist"
+      type: "string"
+      required: false
+      default: "none"
+  paths:
+    /v2/{wishlistId}/{accessToken}/{wishlistName}/wishlistType/{type}/{commentId}/detail:
+      get:
+        tags: ["Wishlist","GET"]
+        responses:
+          200:
+            description: "Show Wishlist details"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/wishlistName"
+          -
+            $ref: "#/parameters/sort"
+          -
+            $ref: "#/parameters/type"
+          -
+            $ref: "#/parameters/commentId"
+
+    /v2/{wishlistId}/{accessToken}/{wishlistName}/wishlistType/{type}/create:
+      post:
+        tags: ["Wishlist","POST"]
+        responses:
+          200:
+            description: "Create the Wishlist"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistName"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/type"
+    /v2/{wishlistId}/{accessToken}/{wishlistName}/wishlistType/{type}/update:
+      put:
+        tags: ["Wishlist","PUT"]
+        responses:
+          200:
+            description: "Update the Wishlist"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/wishlistName"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/type"
+
+    /v2/{wishlistId}/{accessToken}/{wishlistName}/delete:
+      delete:
+        tags: ["Wishlist","DELETE"]
+        responses:
+          200:
+            description: "Delete the Wishlist"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/wishlistName"
+          -
+            $ref: "#/parameters/accessToken"
+    /v2/{wishlistId}/{accessToken}/{wishlistName}/clone:
+      post:
+        tags: ["Wishlist","POST"]
+        responses:
+          200:
+            description: "Clone the Wishlist"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/wishlistName"
+          -
+            $ref: "#/parameters/accessToken"
+
+    /v2/{wishlistId}/{accessToken}/merge:
+      put:
+        tags: ["Wishlist","PUT"]
+        responses:
+          200:
+            description: "Merge the Wishlist"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/destWishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/checkType"
+
+
+    /v2/{wishlistId}/{accessToken}/item/detail:
+      get:
+          tags: ["Items","GET"]
+          responses:
+            200:
+              description: "Wishlist Item details"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/listItemId"
+            -
+              $ref: "#/parameters/sort"
+            -
+              $ref: "#/parameters/filter"
+            # -
+            #   $ref: "#/parameters/items"
+
+    /v2/{wishlistId}/{accessToken}/single/item/{itemId}/memo/{memoId}/detail:
+      get:
+          tags: ["Items","Memo","GET"]
+          responses:
+            200:
+              description: "Wishlist single item details"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/itemId"
+            -
+              $ref: "#/parameters/memoId"
+            # -
+            #   $ref: "#/parameters/items"
+    /v2/{wishlistId}/{accessToken}/{itemId}/create:
+      post:
+          tags: ["Items","POST"]
+          responses:
+            200:
+              description: "Put new item in the wishlist"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/itemId"
+            # -
+            #   $ref: "#/parameters/items.SKU.Color"
+
+    /v2/{wishlistId}/{accessToken}/{itemId}/update:
+      put:
+          tags: ["Items","PUT"]
+          responses:
+            200:
+              description: "update the item length and size in the wishlist (if color is updated create new item with same itemId[call create api not update])"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/itemId"
+            -
+              $ref: "#/parameters/destWishlistId"
+
+    /v2/{wishlistId}/{accessToken}/{itemId}/move:
+      put:
+          tags: ["Items","PUT"]
+          responses:
+            200:
+              description: "moves one item from one wishlist into another wishlist [call delete api on that wishlist itemid]"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/itemId"
+            -
+              $ref: "#/parameters/destWishlistId"
+
+    /v2/{wishlistId}/{accessToken}/{itemId}/delete:
+      delete:
+          tags: ["Items","DELETE"]
+          responses:
+            200:
+              description: "Deletes item in the wishlist"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/itemId"
+
+    /v2/{wishlistId}/{accessToken}/style/detail:
+      get:
+          tags: ["Styles", "GET"]
+          responses:
+            200:
+              description: "Show the Styles in the wishlist and filters and/or sort"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/sort"
+            -
+              $ref: "#/parameters/styleFilter"
+            -
+              $ref: "#/parameters/listStyleId"
+            # -
+            #   $ref: "#/parameters/styles"
+    /v2/{wishlistId}/{accessToken}/single/style/{styleId}/memo/{memoId}/detail:
+      get:
+          tags: ["Styles","Memo","GET"]
+          responses:
+            200:
+              description: "Wishlist single style details"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/styleId"
+            -
+              $ref: "#/parameters/memoId"
+            # -
+            #   $ref: "#/parameters/items"
+
+    /v2/{wishlistId}/{accessToken}/{styleId}/create:
+      post:
+          tags: ["Styles","POST"]
+          responses:
+            200:
+              description: "Puts a new style in the wishlist"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/styleId"
+    /v2/{wishlistId}/{accessToken}/{styleId}/move:
+        put:
+          tags: ["Styles","PUT"]
+          responses:
+            200:
+              description: "moves one styles from one wishlist into another wishlist [call delete api on that wishlist styleId]"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/styleId"
+            -
+              $ref: "#/parameters/destWishlistId"
+
+    /v2/{wishlistId}/{accessToken}/{styleId}/delete:
+      delete:
+          tags: ["Styles","DELETE"]
+          responses:
+            200:
+              description: "Deletes style in the wishlist"
+          parameters:
+            -
+              $ref: "#/parameters/wishlistId"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/styleId"
+
+      #TODO: search
+
+    /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/create:
+      post:
+        tags: ["Memo","Items","POST"]
+        responses:
+          200:
+            description: "add memo for the individual item"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/itemId"
+          -
+            $ref: "#/parameters/memoId"
+          # -
+          #   $ref: "#/parameters/"
+     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
+      put:
+        tags: ["Memo","Items","PUT"]
+        responses:
+          200:
+            description: "update memo for the individual item"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/itemId"
+          -
+            $ref: "#/parameters/memoId"
+          # -
+          #   $ref: "#/parameters/"
+    /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/delete:
+      put:
+        tags: ["Memo","Items","DELETE"]
+        responses:
+          200:
+            description: "delete memo for the individual item"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/itemId"
+          -
+            $ref: "#/parameters/memoId"
+    /v2/{wishlistId}/{accessToken}/style/{styleId}/memo/{memoId}/create:
+      post:
+        tags: ["Memo","Styles","POST"]
+        responses:
+          200:
+            description: "add memo for the individual style"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/styleId"
+          -
+            $ref: "#/parameters/memoId"
+          # -
+          #   $ref: "#/parameters/"
+     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
+      put:
+        tags: ["Memo","Styles","PUT"]
+        responses:
+          200:
+            description: "update memo for the individual style"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/styleId"
+          -
+            $ref: "#/parameters/memoId"
+          # -
+          #   $ref: "#/parameters/"
+    /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/delete:
+      put:
+        tags: ["Memo","Styles","DELETE"]
+        responses:
+          200:
+            description: "delete memo for the individual item"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/itemId"
+          -
+            $ref: "#/parameters/memoId"
+    /v2/{wishlistId}/{accessToken}/comment/{commentId}/create:
+      post:
+        tags: ["Comment","Wishlist","POST"]
+        responses:
+          200:
+            description: "memo for individual styles"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/commentId"
+          # -
+          #   $ref: "#/parameters/"
+    /v2/{wishlistId}/{accessToken}/comment/{commentId}/update:
+      put:
+        tags: ["Comment","Wishlist","PUT"]
+        responses:
+          200:
+            description: "memo for individual styles"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/commentId"
+
+    /v2/{wishlistId}/{accessToken}/comment/{commentId}/delete:
+      delete:
+        tags: ["Comment","Wishlist","DELETE"]
+        responses:
+          200:
+            description: "memo for individual styles"
+        parameters:
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/commentId"
