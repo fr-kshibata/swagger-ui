@@ -469,7 +469,7 @@
             $ref: "#/parameters/memoId"
           # -
           #   $ref: "#/parameters/"
-     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
+    /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
       put:
         tags: ["Memo","Items","PUT"]
         responses:
@@ -518,7 +518,7 @@
             $ref: "#/parameters/memoId"
           # -
           #   $ref: "#/parameters/"
-     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
+    /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
       put:
         tags: ["Memo","Styles","PUT"]
         responses:
@@ -536,7 +536,7 @@
           # -
           #   $ref: "#/parameters/"
     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/delete:
-      put:
+      delete:
         tags: ["Memo","Styles","DELETE"]
         responses:
           200:
