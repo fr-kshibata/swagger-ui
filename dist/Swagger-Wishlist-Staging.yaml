@@ -180,7 +180,7 @@
   paths:
     /v2/{wishlistId}/{accessToken}/{wishlistName}/wishlistType/{type}/{commentId}/detail:
       get:
-        tags: ["Wishlist","GET"]
+        tags: ["Wishlist","GET","List"]
         responses:
           200:
             description: "Show Wishlist details"
@@ -200,7 +200,7 @@
 
     /v2/{wishlistId}/{accessToken}/{wishlistName}/wishlistType/{type}/create:
       post:
-        tags: ["Wishlist","POST"]
+        tags: ["Wishlist","POST","List"]
         responses:
           200:
             description: "Create the Wishlist"
@@ -213,7 +213,7 @@
             $ref: "#/parameters/type"
     /v2/{wishlistId}/{accessToken}/{wishlistName}/wishlistType/{type}/update:
       put:
-        tags: ["Wishlist","PUT"]
+        tags: ["Wishlist","PUT","List"]
         responses:
           200:
             description: "Update the Wishlist"
@@ -229,7 +229,7 @@
 
     /v2/{wishlistId}/{accessToken}/{wishlistName}/delete:
       delete:
-        tags: ["Wishlist","DELETE"]
+        tags: ["Wishlist","DELETE","List"]
         responses:
           200:
             description: "Delete the Wishlist"
@@ -242,7 +242,7 @@
             $ref: "#/parameters/accessToken"
     /v2/{wishlistId}/{accessToken}/{wishlistName}/clone:
       post:
-        tags: ["Wishlist","POST"]
+        tags: ["Wishlist","POST","List"]
         responses:
           200:
             description: "Clone the Wishlist"
@@ -256,7 +256,7 @@
 
     /v2/{wishlistId}/{accessToken}/merge:
       put:
-        tags: ["Wishlist","PUT"]
+        tags: ["Wishlist","PUT","List"]
         responses:
           200:
             description: "Merge the Wishlist"
@@ -273,7 +273,7 @@
 
     /v2/{wishlistId}/{accessToken}/item/detail:
       get:
-          tags: ["Items","GET"]
+          tags: ["Items","GET","List"]
           responses:
             200:
               description: "Wishlist Item details"
@@ -293,7 +293,7 @@
 
     /v2/{wishlistId}/{accessToken}/single/item/{itemId}/memo/{memoId}/detail:
       get:
-          tags: ["Items","Memo","GET"]
+          tags: ["Items","Memo","GET","List"]
           responses:
             200:
               description: "Wishlist single item details"
@@ -310,7 +310,7 @@
             #   $ref: "#/parameters/items"
     /v2/{wishlistId}/{accessToken}/{itemId}/create:
       post:
-          tags: ["Items","POST"]
+          tags: ["Items","POST","List"]
           responses:
             200:
               description: "Put new item in the wishlist"
@@ -326,7 +326,7 @@
 
     /v2/{wishlistId}/{accessToken}/{itemId}/update:
       put:
-          tags: ["Items","PUT"]
+          tags: ["Items","PUT","List"]
           responses:
             200:
               description: "update the item length and size in the wishlist (if color is updated create new item with same itemId[call create api not update])"
@@ -342,7 +342,7 @@
 
     /v2/{wishlistId}/{accessToken}/{itemId}/move:
       put:
-          tags: ["Items","PUT"]
+          tags: ["Items","PUT","List"]
           responses:
             200:
               description: "moves one item from one wishlist into another wishlist [call delete api on that wishlist itemid]"
@@ -358,7 +358,7 @@
 
     /v2/{wishlistId}/{accessToken}/{itemId}/delete:
       delete:
-          tags: ["Items","DELETE"]
+          tags: ["Items","DELETE","List"]
           responses:
             200:
               description: "Deletes item in the wishlist"
@@ -372,7 +372,7 @@
 
     /v2/{wishlistId}/{accessToken}/style/detail:
       get:
-          tags: ["Styles", "GET"]
+          tags: ["Styles", "GET","List"]
           responses:
             200:
               description: "Show the Styles in the wishlist and filters and/or sort"
@@ -391,7 +391,7 @@
             #   $ref: "#/parameters/styles"
     /v2/{wishlistId}/{accessToken}/single/style/{styleId}/memo/{memoId}/detail:
       get:
-          tags: ["Styles","Memo","GET"]
+          tags: ["Styles","Memo","GET","List"]
           responses:
             200:
               description: "Wishlist single style details"
@@ -409,7 +409,7 @@
 
     /v2/{wishlistId}/{accessToken}/{styleId}/create:
       post:
-          tags: ["Styles","POST"]
+          tags: ["Styles","POST","List"]
           responses:
             200:
               description: "Puts a new style in the wishlist"
@@ -422,7 +422,7 @@
               $ref: "#/parameters/styleId"
     /v2/{wishlistId}/{accessToken}/{styleId}/move:
         put:
-          tags: ["Styles","PUT"]
+          tags: ["Styles","PUT","List"]
           responses:
             200:
               description: "moves one styles from one wishlist into another wishlist [call delete api on that wishlist styleId]"
@@ -438,7 +438,7 @@
 
     /v2/{wishlistId}/{accessToken}/{styleId}/delete:
       delete:
-          tags: ["Styles","DELETE"]
+          tags: ["Styles","DELETE","List"]
           responses:
             200:
               description: "Deletes style in the wishlist"
@@ -454,7 +454,7 @@
 
     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/create:
       post:
-        tags: ["Memo","Items","POST"]
+        tags: ["Memo","Items","POST","List"]
         responses:
           200:
             description: "add memo for the individual item"
@@ -471,7 +471,7 @@
           #   $ref: "#/parameters/"
     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
       put:
-        tags: ["Memo","Items","PUT"]
+        tags: ["Memo","Items","PUT","List"]
         responses:
           200:
             description: "update memo for the individual item"
@@ -488,7 +488,7 @@
           #   $ref: "#/parameters/"
     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/delete:
       put:
-        tags: ["Memo","Items","DELETE"]
+        tags: ["Memo","Items","DELETE","List"]
         responses:
           200:
             description: "delete memo for the individual item"
@@ -503,7 +503,7 @@
             $ref: "#/parameters/memoId"
     /v2/{wishlistId}/{accessToken}/style/{styleId}/memo/{memoId}/create:
       post:
-        tags: ["Memo","Styles","POST"]
+        tags: ["Memo","Styles","POST","List"]
         responses:
           200:
             description: "add memo for the individual style"
@@ -520,7 +520,7 @@
           #   $ref: "#/parameters/"
     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/update:
       put:
-        tags: ["Memo","Styles","PUT"]
+        tags: ["Memo","Styles","PUT","List"]
         responses:
           200:
             description: "update memo for the individual style"
@@ -537,7 +537,7 @@
           #   $ref: "#/parameters/"
     /v2/{wishlistId}/{accessToken}/item/{itemId}/memo/{memoId}/delete:
       delete:
-        tags: ["Memo","Styles","DELETE"]
+        tags: ["Memo","Styles","DELETE","List"]
         responses:
           200:
             description: "delete memo for the individual item"
@@ -552,7 +552,7 @@
             $ref: "#/parameters/memoId"
     /v2/{wishlistId}/{accessToken}/comment/{commentId}/create:
       post:
-        tags: ["Comment","Wishlist","POST"]
+        tags: ["Comment","Wishlist","POST","List"]
         responses:
           200:
             description: "memo for individual styles"
@@ -567,7 +567,7 @@
           #   $ref: "#/parameters/"
     /v2/{wishlistId}/{accessToken}/comment/{commentId}/update:
       put:
-        tags: ["Comment","Wishlist","PUT"]
+        tags: ["Comment","Wishlist","PUT","List"]
         responses:
           200:
             description: "memo for individual styles"
@@ -581,7 +581,7 @@
 
     /v2/{wishlistId}/{accessToken}/comment/{commentId}/delete:
       delete:
-        tags: ["Comment","Wishlist","DELETE"]
+        tags: ["Comment","Wishlist","DELETE","List"]
         responses:
           200:
             description: "memo for individual styles"
