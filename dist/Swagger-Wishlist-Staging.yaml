@@ -195,6 +195,7 @@
       name: "region"
       description: "specific country"
       required: "true"
+      type: "string"
       default: "jp"
       enum:
         - "jp"
@@ -219,6 +220,7 @@
       name: "version"
       description: "version 1,2,3,4,5,6"
       required: true
+      type: "string"
       default: "v1"
       enum:
         - "v1"
@@ -801,7 +803,72 @@
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/commentId"
-
-                  #TODO: search
+# share api
+    /{version}/{brand}/{region}/{wishlistId}/{accessToken}/{wishlistName}/wishlistType/{type}/{commentId}/share/{snsSite}:
+      post:
+        tags: ["Wishlist","Share","POST","List"]
+        responses:
+          200:
+            description: "Show Wishlist details"
+        parameters:
+          -
+            in: "path"
+            name: "snsSite"
+            description: "This the Social Network Sharing API"
+            type: "string"
+            default: "fb"
+            enum:
+              - "fb"
+              - "tw"
+              - "line"
+              - "linkedin"
+          -
+            $ref: "#/parameters/version"
+          -
+            $ref: "#/parameters/brand"
+          -
+            $ref: "#/parameters/region"
+          -
+            $ref: "#/parameters/wishlistId"
+          -
+            $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/wishlistName"
+          -
+            $ref: "#/parameters/sort"
+          -
+            $ref: "#/parameters/type"
+            # search
+    /{version}/{brand}/{region}/{allWishlistId}/{accessToken}/search:
+      get:
+          tags: ["Search","GET","List"]
+          responses:
+            200:
+              description: "Wishlist single item details"
+          parameters:
+            -
+              $ref: "#/parameters/version"
+            -
+              $ref: "#/parameters/brand"
+            -
+              $ref: "#/parameters/region"
+            -
+              in: "path"
+              name: "allWishlistId"
+              description: "A search for wishlistId available for the user authenticated using access token"
+              type: "array"
+            -
+              $ref: "#/parameters/accessToken"
+            -
+              in: "query"
+              name: "itemIdOrStyleId"
+              description: "A search for all item id or style id"
+              type: "array"
+            -
+              in: "query"
+              name: "memoQuery"
+              description: "Query the memo using wishlist Id and Item or style id"
+              type: "array"
+                  #TODO: search ok
                   #TODO: ranking
                   #TODO: External API
