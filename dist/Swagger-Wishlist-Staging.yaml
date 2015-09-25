@@ -813,10 +813,9 @@
             -
               $ref: "#/parameters/q"
             -
-              in: "query"
-              name: "itemIdOrStyleId"
-              description: "A search for all item id or style id"
-              type: "array"
+              $ref: "#/parameters/listItemId"
+            -
+              $ref: "#/parameters/listStyleId"
             -
               in: "query"
               name: "memoQuery"
