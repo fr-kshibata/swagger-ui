@@ -29,7 +29,7 @@
         - "styles"
     wishlistId:
       name: "wishlistId"
-      in: "query"
+      in: "path"
       description: "Identifies the wishlist"
       type: "string"
       required: true
@@ -41,13 +41,7 @@
       type: "string"
       required: true
       default: "11111"
-    wishlistName:
-      name: "wishlistName"
-      description: "The name of the wishlist"
-      in: "path"
-      type: "string"
-      required: true
-      default: "Wishlist1"
+
     checkType:
       name: "checkType"
       description: "outputs true if the types are the same and false if not"
@@ -66,7 +60,7 @@
       required: true
       default: "00000000000000"
     itemId:
-      in: "query"
+      in: "path"
       name: "itemId"
       description: "identifies the items"
       type: "string"
@@ -88,7 +82,7 @@
       default: "4321"
       required: true
     listStyleId:
-      in: "path"
+      in: "query"
       name: "styleId"
       description: "identifies the styles"
       type: "array"
@@ -163,19 +157,6 @@
       description: "Full-text search query"
       type: "string"
       required: false
-    itemName:
-      in: "query"
-      name: "itemName"
-      description: "individual name of the item"
-      type: "string"
-      required: true
-    styleName:
-      in: "query"
-      name: "styleName"
-      description: "individual name of the style"
-      type: "string"
-      required: true
-
     memoId:
       in: "query"
       name: "memoId"
@@ -184,7 +165,7 @@
       required: false
       default: "none"
     commentId:
-      in: "query"
+      in: "path"
       name: "commentId"
       description: "Comment for the entire wishlist"
       type: "string"
@@ -248,7 +229,7 @@
         - "v10"
 
   paths:
-    /{version}/{brand}/{region}/wishlist/{wishlistName}/detail:
+    /{version}/{brand}/{region}/wishlist/{wishlistId}/comment/{commentId}:
       get:
         tags: ["Wishlist","GET","List"]
         responses:
@@ -266,15 +247,13 @@
           -
             $ref: "#/parameters/accessToken"
           -
-            $ref: "#/parameters/wishlistName"
-          -
             $ref: "#/parameters/sort"
           -
             $ref: "#/parameters/type"
           -
             $ref: "#/parameters/commentId"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistName}/create:
+    /{version}/{brand}/{region}/wishlist/:
       post:
         tags: ["Wishlist","POST","List"]
         responses:
@@ -288,12 +267,10 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistName"
-          -
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/type"
-    /{version}/{brand}/{region}/wishlist/{wishlistName}/update:
+    /{version}/{brand}/{region}/wishlist/{wishlistId}/:
       put:
         tags: ["Wishlist","PUT","List"]
         responses:
@@ -309,13 +286,11 @@
           -
             $ref: "#/parameters/wishlistId"
           -
-            $ref: "#/parameters/wishlistName"
-          -
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/type"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistName}/delete:
+    /{version}/{brand}/{region}/wishlist/{wishlistId}:
       delete:
         tags: ["Wishlist","DELETE","List"]
         responses:
@@ -331,10 +306,8 @@
           -
             $ref: "#/parameters/wishlistId"
           -
-            $ref: "#/parameters/wishlistName"
-          -
             $ref: "#/parameters/accessToken"
-    /{version}/{brand}/{region}/wishlist/{wishlistName}/clone:
+    /{version}/{brand}/{region}/wishlist/{wishlistId}/clone:
       post:
         tags: ["Wishlist","POST","List"]
         responses:
@@ -350,13 +323,9 @@
           -
             $ref: "#/parameters/wishlistId"
           -
-            $ref: "#/parameters/destWishlistId"
-          -
-            $ref: "#/parameters/wishlistName"
-          -
             $ref: "#/parameters/accessToken"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistName}/merge:
+    /{version}/{brand}/{region}/wishlist/{wishlistId}/merge:
       put:
         tags: ["Wishlist","PUT","List"]
         responses:
@@ -372,8 +341,6 @@
           -
             $ref: "#/parameters/wishlistId"
           -
-            $ref: "#/parameters/wishlistName"
-          -
             $ref: "#/parameters/destWishlistId"
           -
             $ref: "#/parameters/accessToken"
@@ -381,7 +348,7 @@
             $ref: "#/parameters/checkType"
 
 
-    /{version}/{brand}/{region}/items/detail:
+    /{version}/{brand}/{region}/items/wishlist/{wishlistId}:
       get:
           tags: ["Items","GET","List"]
           responses:
@@ -404,10 +371,12 @@
               $ref: "#/parameters/sort"
             -
               $ref: "#/parameters/filter"
+            -
+              $ref: "#/parameters/q"
             # -
             #   $ref: "#/parameters/items"
 
-    /{version}/{brand}/{region}/item/{itemName}/detail:
+    /{version}/{brand}/{region}/item/{itemId}/memo/{memoId}/:
       get:
           tags: ["Items","Memo","GET","List"]
           responses:
@@ -416,8 +385,6 @@
           parameters:
             -
               $ref: "#/parameters/version"
-            -
-              $ref: "#/parameters/itemName"
             -
               $ref: "#/parameters/brand"
             -
@@ -430,9 +397,8 @@
               $ref: "#/parameters/itemId"
             -
               $ref: "#/parameters/memoId"
-            # -
-            #   $ref: "#/parameters/items"
-    /{version}/{brand}/{region}/item/{itemName}/create:
+
+    /{version}/{brand}/{region}/item/wishlist/{wishlistId}:
       post:
           tags: ["Items","POST","List"]
           responses:
@@ -446,17 +412,13 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/itemName"
-            -
               $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
-            -
-              $ref: "#/parameters/itemId"
             # -
             #   $ref: "#/parameters/items.SKU.Color"
 
-    /{version}/{brand}/{region}/item/{itemName}/update:
+    /{version}/{brand}/{region}/item/{itemId}/wishlist/{wishlistId}/move:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -470,17 +432,17 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/itemName"
-            -
               $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/destWishlistId"
             -
               $ref: "#/parameters/itemId"
             # -
             #   $ref: "#/parameters/destWishlistId"
 
-    /{version}/{brand}/{region}/item/{itemName}/move:
+    /{version}/{brand}/{region}/item/{itemId}/wishlist/{wishlistId}:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -494,8 +456,6 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/itemName"
-            -
               $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
@@ -504,7 +464,7 @@
             -
               $ref: "#/parameters/destWishlistId"
 
-    /{version}/{brand}/{region}/item/{itemName}/delete:
+    /{version}/{brand}/{region}/item/{itemId}/wishlist/{wishlistId}:
       delete:
           tags: ["Items","DELETE","List"]
           responses:
@@ -518,15 +478,13 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/itemName"
-            -
               $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/itemId"
 
-    /{version}/{brand}/{region}/styles/detail:
+    /{version}/{brand}/{region}/styles:
       get:
           tags: ["Styles", "GET","List"]
           responses:
@@ -549,9 +507,11 @@
               $ref: "#/parameters/styleFilter"
             -
               $ref: "#/parameters/listStyleId"
+            -
+              $ref: "#/parameters/q"
             # -
             #   $ref: "#/parameters/styles"
-    /{version}/{brand}/{region}/style/{styleName}/detail:
+    /{version}/{brand}/{region}/style/{styleId}/memo/{memoId}/:
       get:
           tags: ["Styles","Memo","GET","List"]
           responses:
@@ -571,13 +531,11 @@
             -
               $ref: "#/parameters/styleId"
             -
-              $ref: "#/parameters/styleName"
-            -
               $ref: "#/parameters/memoId"
             # -
             #   $ref: "#/parameters/items"
 
-    /{version}/{brand}/{region}/style/{styleName}/create:
+    /{version}/{brand}/{region}/style/wishlist/{wishlistId}:
       post:
           tags: ["Styles","POST","List"]
           responses:
@@ -596,9 +554,7 @@
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/styleId"
-            -
-              $ref: "#/parameters/styleName"
-    /{version}/{brand}/{region}/style/{styleName}/move:
+    /{version}/{brand}/{region}/style/{styleId}/wishlist/{wishlistId}/move:
         put:
           tags: ["Styles","PUT","List"]
           responses:
@@ -620,7 +576,7 @@
             -
               $ref: "#/parameters/destWishlistId"
 
-    /{version}/{brand}/{region}/{styleId}/delete:
+    /{version}/{brand}/{region}/style/{styleId}/wishlist/{wishlistId}:
       delete:
           tags: ["Styles","DELETE","List"]
           responses:
@@ -640,7 +596,7 @@
             -
               $ref: "#/parameters/styleId"
 
-    /{version}/{brand}/{region}/item/memo/create:
+    /{version}/{brand}/{region}/item/{itemId}/wishlist/{wishlistId}/memo/:
       post:
         tags: ["Memo","Items","POST","List"]
         responses:
@@ -663,7 +619,7 @@
             $ref: "#/parameters/memoId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/item/memo/update:
+    /{version}/{brand}/{region}/item/{itemId}/{wishlist/wishlistId}/memo/{memoId}:
       put:
         tags: ["Memo","Items","PUT","List"]
         responses:
@@ -686,8 +642,8 @@
             $ref: "#/parameters/memoId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/item/memo/delete:
-      put:
+    /{version}/{brand}/{region}/item/{itemId}/wishlist/{wishlistId}memo/{memoId}:
+      delete:
         tags: ["Memo","Items","DELETE","List"]
         responses:
           200:
@@ -707,7 +663,7 @@
             $ref: "#/parameters/itemId"
           -
             $ref: "#/parameters/memoId"
-    /{version}/{brand}/{region}/style/memo/create:
+    /{version}/{brand}/{region}/style/{styleId}/wishlist/{wishlistId}/memo:
       post:
         tags: ["Memo","Styles","POST","List"]
         responses:
@@ -730,7 +686,7 @@
             $ref: "#/parameters/memoId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/style/memo/update:
+    /{version}/{brand}/{region}/style/{styleId}/wishlist/{wishlistId}/memo/{memoId}:
       put:
         tags: ["Memo","Styles","PUT","List"]
         responses:
@@ -753,7 +709,7 @@
             $ref: "#/parameters/memoId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/style/memo/delete:
+    /{version}/{brand}/{region}/style/{styleId}/wishlist/{wishlistId}/memo/{memoId}:
       delete:
         tags: ["Memo","Styles","DELETE","List"]
         responses:
@@ -774,7 +730,7 @@
             $ref: "#/parameters/itemId"
           -
             $ref: "#/parameters/memoId"
-    /{version}/{brand}/{region}/comment/create:
+    /{version}/{brand}/{region}/comment/wishlist/{wishlistId}:
       post:
         tags: ["Comment","POST","List"]
         responses:
@@ -795,7 +751,7 @@
             $ref: "#/parameters/commentId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/comment/update:
+    /{version}/{brand}/{region}/comment/{commentId}/wishlist/{wishlistId}:
       put:
         tags: ["Comment","PUT","List"]
         responses:
@@ -815,7 +771,7 @@
           -
             $ref: "#/parameters/commentId"
 
-    /{version}/{brand}/{region}/comment/delete:
+    /{version}/{brand}/{region}/comment/{commentId}/wishlist/{wishlistId}:
       delete:
         tags: ["Comment","DELETE","List"]
         responses:
@@ -834,43 +790,7 @@
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/commentId"
-# share api
-    /{version}/{brand}/{region}/{wishlistName}/share/{snsSite}:
-      post:
-        tags: ["Wishlist","Share","POST","List"]
-        responses:
-          200:
-            description: "Show Wishlist details"
-        parameters:
-          -
-            in: "path"
-            name: "snsSite"
-            description: "This the Social Network Sharing API"
-            type: "string"
-            default: "fb"
-            enum:
-              - "fb"
-              - "tw"
-              - "line"
-              - "linkedin"
-          -
-            $ref: "#/parameters/version"
-          -
-            $ref: "#/parameters/brand"
-          -
-            $ref: "#/parameters/region"
-          -
-            $ref: "#/parameters/wishlistId"
-          -
-            $ref: "#/parameters/accessToken"
-          -
-            $ref: "#/parameters/wishlistName"
-          -
-            $ref: "#/parameters/sort"
-          -
-            $ref: "#/parameters/type"
-            # search
-    /{version}/{brand}/{region}/{allWishlistId}/search:
+    /{version}/{brand}/{region}/wishlist/search:
       get:
           tags: ["Search","GET","List"]
           responses:

@@ -51,5 +51,8 @@
     "mocha": "^2.1.0",
     "selenium-webdriver": "^2.45.0",
     "swagger-client": "2.1.2"
+  },
+  "dependencies": {
+    "swagger-parser": "^2.5.0"
   }
 }
