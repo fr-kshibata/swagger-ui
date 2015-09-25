@@ -442,7 +442,7 @@
             # -
             #   $ref: "#/parameters/destWishlistId"
 
-    /{version}/{brand}/{region}/item/{itemId}/wishlist/{wishlistId}:
+    /{version}/{brand}/{region}/item/{itemId}/wishlist/{wishlistId}/:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -686,7 +686,7 @@
             $ref: "#/parameters/memoId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/style/{styleId}/wishlist/{wishlistId}/memo/{memoId}:
+    /{version}/{brand}/{region}/style/{styleId}/wishlist/{wishlistId}/memo/{memoId}/:
       put:
         tags: ["Memo","Styles","PUT","List"]
         responses:
@@ -751,7 +751,7 @@
             $ref: "#/parameters/commentId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/comment/{commentId}/wishlist/{wishlistId}:
+    /{version}/{brand}/{region}/comment/{commentId}/wishlist/{wishlistId}/:
       put:
         tags: ["Comment","PUT","List"]
         responses:
