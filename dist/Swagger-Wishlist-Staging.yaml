@@ -648,8 +648,6 @@
           -
             $ref: "#/parameters/accessToken"
           -
-            $ref: "#/parameters/memoId"
-          -
             $ref: "#/parameters/entryId"
           # -
           #   $ref: "#/parameters/"
