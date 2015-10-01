@@ -570,8 +570,6 @@
               $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
-            -
-              $ref: "#/parameters/styleId"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/style/{styleId}/move:
         put:
           tags: ["Styles","PUT","List"]
@@ -761,8 +759,6 @@
             $ref: "#/parameters/wishlistId"
           -
             $ref: "#/parameters/accessToken"
-          -
-            $ref: "#/parameters/commentId"
           # -
           #   $ref: "#/parameters/"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/comment/{commentId}:
