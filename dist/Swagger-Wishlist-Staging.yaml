@@ -135,7 +135,12 @@
       name: "offset"
       description: "where the pagination starts"
       type: "integer"
-
+    storeId:
+      in: "query"
+      name: "storeId"
+      description: "store Id for in store mode if null then default to the normal e-c site prices"
+      type: "string"
+      default: "null"
     sort:
       in: "query"
       name: "sort"
@@ -271,8 +276,9 @@
 
   paths:
     /{version}/{brand}/{region}/wishlists:
+      description: "displays all wishlists"
       get:
-        tags: ["Wishlist","GET","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -326,6 +332,7 @@
 
     /{version}/{brand}/{region}/wishlist/{wishlistId}:
       get:
+        description: "displays the individual wishlist with the contents either styles or items"
         tags: ["Wishlist","GET","List"]
         responses:
           400:
@@ -347,8 +354,10 @@
             $ref: "#/parameters/wishlistId"
           -
             $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/storeId"
       put:
-        tags: ["Wishlist","PUT","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -394,7 +403,7 @@
             $ref: "#/parameters/accessToken"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/clone:
       post:
-        tags: ["Wishlist","POST","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -418,7 +427,7 @@
 
     /{version}/{brand}/{region}/wishlist/{wishlistId}/merge:
       put:
-        tags: ["Wishlist","PUT","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -521,7 +530,7 @@
 
     /{version}/{brand}/{region}/wishlist/{wishlistId}/item/{itemId}/move:
       put:
-          tags: ["Items","PUT","List"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
@@ -572,7 +581,7 @@
               $ref: "#/parameters/accessToken"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/style/{styleId}/move:
         put:
-          tags: ["Styles","PUT","List"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
@@ -626,7 +635,7 @@
 
     /{version}/{brand}/{region}/wishlist/{wishlistId}/entry/{entryId}/memo:
       post:
-        tags: ["Memo","POST","List","entry"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -653,7 +662,7 @@
           #   $ref: "#/parameters/"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/entry/{entryId}/memo/{memoId}:
       get:
-          tags: ["Memo","GET","List","entry"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
@@ -680,7 +689,7 @@
               $ref: "#/parameters/entryId"
 
       put:
-        tags: ["Memo","PUT","List","entry"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -708,7 +717,7 @@
           # -
           #   $ref: "#/parameters/"
       delete:
-        tags: ["Memo","Items","DELETE","List","entry"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -736,7 +745,7 @@
 
     /{version}/{brand}/{region}/wishlist/{wishlistId}/comment:
       post:
-        tags: ["Comment","POST","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -761,7 +770,7 @@
           #   $ref: "#/parameters/"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/comment/{commentId}:
       put:
-        tags: ["Comment","PUT","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -785,7 +794,7 @@
           -
             $ref: "#/parameters/commentId"
       delete:
-        tags: ["Comment","DELETE","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -810,7 +819,7 @@
             $ref: "#/parameters/commentId"
     /{version}/{brand}/{region}/wishlist/search:
       get:
-          tags: ["Search","GET","List"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
