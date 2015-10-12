@@ -230,6 +230,8 @@
         - "cdc"
         - "ltc"
         - "jb"
+        - "fr"
+        - "uq-gu"
     region:
       in: "path"
       name: "region"
@@ -303,7 +305,7 @@
             $ref: "#/parameters/orderBy"
     /{version}/{brand}/{region}/wishlist:
       post:
-        tags: ["Wishlist","POST","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -330,7 +332,7 @@
             $ref: "#/parameters/description"
 
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}:
+    /{version}/{brand}/{region}/wishlist/:
       get:
         description: "displays the individual wishlist with the contents either styles or items"
         tags: ["Wishlist","GET","List"]
@@ -342,7 +344,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "view single wishlist"
+            description: "view two default wishlist"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -350,8 +352,6 @@
             $ref: "#/parameters/brand"
           -
             $ref: "#/parameters/region"
-          -
-            $ref: "#/parameters/wishlistId"
           -
             $ref: "#/parameters/accessToken"
           -
@@ -362,7 +362,7 @@
           400:
             description: "invalid parameters"
           404:
-            description: "wishlist id not found"
+            description: "user id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -385,11 +385,11 @@
           400:
             description: "invalid parameters"
           404:
-            description: "wishlist id not found"
+            description: "user id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Delete the Wishlist"
+            description: "Delete the Wishlist contents for the specific type (wishlist itself is not deletedas)"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -398,9 +398,9 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
-          -
             $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/type"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/clone:
       post:
         tags: ["outOfScope"]
@@ -451,7 +451,7 @@
           -
             $ref: "#/parameters/accessToken"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/item:
+    /{version}/{brand}/{region}/wishlist/item:
       post:
           tags: ["Items","POST","List"]
           responses:
@@ -471,11 +471,9 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/wishlistId"
-            -
               $ref: "#/parameters/accessToken"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/item/{itemId}:
+    /{version}/{brand}/{region}/wishlist/item/{itemId}:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -495,13 +493,9 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/wishlistId"
-            -
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/itemId"
-            -
-              $ref: "#/parameters/target"
       delete:
           tags: ["Items","DELETE","List"]
           responses:
@@ -520,8 +514,6 @@
               $ref: "#/parameters/brand"
             -
               $ref: "#/parameters/region"
-            -
-              $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
             -
@@ -556,7 +548,7 @@
             -
               $ref: "#/parameters/itemId"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/style:
+    /{version}/{brand}/{region}/wishlist/style:
       post:
           tags: ["Styles","POST","List"]
           responses:
@@ -575,8 +567,6 @@
               $ref: "#/parameters/brand"
             -
               $ref: "#/parameters/region"
-            -
-              $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
     /{version}/{brand}/{region}/wishlist/{wishlistId}/style/{styleId}/move:
@@ -607,7 +597,7 @@
             -
               $ref: "#/parameters/target"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/style/{styleId}:
+    /{version}/{brand}/{region}/wishlist/style/{styleId}:
       delete:
           tags: ["Styles","DELETE","List"]
           responses:
@@ -626,8 +616,6 @@
               $ref: "#/parameters/brand"
             -
               $ref: "#/parameters/region"
-            -
-              $ref: "#/parameters/wishlistId"
             -
               $ref: "#/parameters/accessToken"
             -
