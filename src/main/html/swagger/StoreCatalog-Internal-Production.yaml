@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  title: Store Catalog API Specifications (consumer)
+  title: Store Catalog API Specifications (internal)
   description: >-
     This is the complete specification of Uniqlo (Fast Retailing) Store Catalog
     System. <br>
@@ -22,7 +22,7 @@ info:
   license:
     name: Proprietry Uniqlo license
     url: 'http://www.uniqlo.com/licenses/api-license'
-host: api.fastretailing.com
+host: intra.fastretailing.com
 schemes:
   - https
 basePath: /catalog
@@ -37,7 +37,7 @@ paths:
     get:
       summary: Store Status
       description: |
-        This endpoint returns product stock status of the store.
+        This endpoint returns product stock of the store.
       parameters:
         - $ref: '#/parameters/localeParam'
         - $ref: '#/parameters/brandParam'
@@ -48,37 +48,21 @@ paths:
           description: Callback function name. (Required in case jsonp request)
           required: false
           type: string
-          enum:
-            - callback_name
         - name: store_id
           in: query
-          description: 'Store code (8digit) You can specify multiple ids separated by commas. Examples: "10101525", "10101267,10101424" (multiple comma seprated)'
+          description: 'Store code (8digit or 6digit) You can specify multiple ids separated by commas. The maximum number of multiple ids that can be specified is 100. Examples: "10101525" (8digit), "107844" (6digit), "10101267,10101424" (multiple comma seprated)'
           required: true
           type: string
-          enum:
-            - '10100158'
-            - '10101525'
-            - '107844'
-            - '10101267,10101424'
         - name: plu_code
           in: query
           description: Price look up code (12 or 13 digit). __either of sku_code and plu_code is required.__
           required: false
           type: string
-          enum:
-            - '2000042676599'
-            - '2000051335487'
         - name: sku_code
           in: query
-          description: 'Stock keeping unit code. This API supports 3 patterns. __either of sku_code and plu_code is required.__ Examples: (1) L1 item code (6 or 7 digit) : "087455"  (2) L2 SKU code ({L1 item code}-{Color code}-{Size code}-{pattern length code}) : "087455-01-030-000" (3) L3 SKU code ({L2 SKU code}-{year code}-{season-code}-{cost-number})'
+          description: "Stock keeping unit code. This API supports 3 patterns. __either of sku_code and plu_code is required.__ Examples: (1) L1 item code (6 or 7 digit) : \"087455\" (2) L2 SKU code ({L1 item code}-{Color code}-{Size code}-{pattern length code}) : \"087455-01-030-000\", \"087455-01-\\*-000\" (L1+color), \"087455-\\*-030-000\" (L1+size) (3) L3 SKU code ({L2 SKU code}-{year code}-{season-code}-{cost-number})"
           required: false
           type: string
-          enum:
-            - '075235'
-            - '075235-13'
-            - '075235-13-003'
-            - '075235-13-003-000'
-            - '075235-13-003-000-3-2-1'
         - name: type
           in: query
           description: 'Specify output keys. If you specify "price_range", API unset other keys.'
@@ -107,7 +91,7 @@ paths:
                         {
                           "plu_code": "2000042676599",
                           "sku_code": "075235-13-003-000-3-2-1",
-                          "stock_status": 2,
+                          "stock_num": 2,
                           "price": 190,
                           "limited_price": 0,
                           "limited_price_end": "",
@@ -171,8 +155,6 @@ parameters:
     description: 'A string representing the origin of the current request, generally known as referrer (connection source)'
     required: true
     type: string
-    enum:
-      - test_swagger
 definitions:
   StoreStatus:
     type: object
@@ -225,9 +207,9 @@ definitions:
       sku_code:
         type: integer
         description: Stock keeping unit code(L3 SKU).
-      stock_status:
+      stock_num:
         type: integer
-        description: status 1= nothing 2= small quantity 3= existing 4= not publish an inventory of the store 5= not publish an inventory of this product
+        description: Number of stock
       price:
         type: integer
         description: current unit price
