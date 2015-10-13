@@ -2,14 +2,14 @@
   swagger: "2.0"
   info:
     version: "v1"
-    title: "Wishlist Component"
-    description: "http://itwiki.g1.frgroup/display/DM/20-19.+Wishlist+PF"
+    title: "collection Component"
+    description: "http://itwiki.g1.frgroup/display/DM/20-19.+collection+PF"
     contact:
-      name: "Wishlist PF Team"
+      name: "collection PF Team"
       url: "http://itwiki.g1.frgroup/display/DM/03.+APIs"
       email: "kristian.faeldt@fastretailing.com"
   host: "api.fastretailing.com"
-  basePath: "/wishlist"
+  basePath: "/collection"
   schemes:
     - "https"
   consumes:
@@ -20,24 +20,24 @@
     type:
       name: "type"
       in: "query"
-      description: "Either items or styles wishlist"
+      description: "Either items or styles collection"
       type: "string"
       required: true
       default: "items"
       enum:
         - "items"
         - "styles"
-    wishlistId:
-      name: "wishlistId"
+    collectionId:
+      name: "collectionId"
       in: "path"
-      description: "Identifies the wishlist"
+      description: "Identifies the collection"
       type: "string"
       required: true
       default: "0000000000000"
     target:
       name: "target"
       in: "query"
-      description: "Identifies the destination wishlist"
+      description: "Identifies the destination collection"
       type: "string"
       required: true
       default: "11111"
@@ -69,14 +69,14 @@
     title:
       in: "query"
       name: "title"
-      description: "assigns a non-unique title to the wishlist "
+      description: "assigns a non-unique title to the collection "
       type: "string"
-      default: "wishlist-Title"
+      default: "collection-Title"
       required: true
     description:
       in: "query"
       name: "desc"
-      description: "description for wishlist"
+      description: "description for collection"
       type: "string"
       required: false
     listItemId:
@@ -105,7 +105,7 @@
     items:
       in: "query"
       name: "items"
-      description: "items inside the wishlist"
+      description: "items inside the collection"
       type: "array"
       format: "string"
       required: false
@@ -113,7 +113,7 @@
     styles:
       in: "query"
       name: "styles"
-      description: "styles inside the wishlist"
+      description: "styles inside the collection"
       type: "array"
       format: "string"
       required: false
@@ -213,7 +213,7 @@
     commentId:
       in: "path"
       name: "commentId"
-      description: "Comment for the entire wishlist"
+      description: "Comment for the entire collection"
       type: "string"
       required: false
       default: "none"
@@ -277,8 +277,8 @@
         - "v10"
 
   paths:
-    /{version}/{brand}/{region}/wishlists:
-      description: "displays all wishlists"
+    /{version}/{brand}/{region}/collections:
+      description: "displays all collections"
       get:
         tags: ["outOfScope"]
         responses:
@@ -289,7 +289,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Show all wishlists"
+            description: "Show all collections"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -298,12 +298,12 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/orderBy"
-    /{version}/{brand}/{region}/wishlist:
+    /{version}/{brand}/{region}/collection:
       post:
         tags: ["outOfScope"]
         responses:
@@ -314,7 +314,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Create the Wishlist"
+            description: "Create the collection"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -332,10 +332,9 @@
             $ref: "#/parameters/description"
 
 
-    /{version}/{brand}/{region}/wishlist/:
+    /{version}/{brand}/{region}/collection/:
       get:
-        description: "displays two wishlists at the same time seprated by UI either styles or items"
-        tags: ["Wishlist","GET","List"]
+        tags: ["collection","GET","List"]
         responses:
           400:
             description: "invalid parameters"
@@ -344,7 +343,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "view two default wishlist"
+            description: "view either one of the default collection [style or items]"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -356,6 +355,8 @@
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/storeId"
+          -
+            $ref: "#/parameters/type"
       put:
         tags: ["outOfScope"]
         responses:
@@ -366,7 +367,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Update the Wishlist"
+            description: "Update the collection"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -375,12 +376,12 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
 
       delete:
-        tags: ["Wishlist","DELETE","List"]
+        tags: ["collection","DELETE","List"]
         responses:
           400:
             description: "invalid parameters"
@@ -389,7 +390,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Delete the Wishlist contents for the specific type (wishlist itself is not deletedas)"
+            description: "Delete the collection contents for the specific type (collection itself is not deletedas)"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -401,7 +402,7 @@
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/type"
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/clone:
+    /{version}/{brand}/{region}/collection/{collectionId}/clone:
       post:
         tags: ["outOfScope"]
         responses:
@@ -412,7 +413,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Clone the Wishlist"
+            description: "Clone the collection"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -421,11 +422,11 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/merge:
+    /{version}/{brand}/{region}/collection/{collectionId}/merge:
       put:
         tags: ["outOfScope"]
         responses:
@@ -436,7 +437,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Merge the Wishlist"
+            description: "Merge the collection"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -445,13 +446,13 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/target"
           -
             $ref: "#/parameters/accessToken"
 
-    /{version}/{brand}/{region}/wishlist/item:
+    /{version}/{brand}/{region}/collection/item:
       post:
           tags: ["Items","POST","List"]
           responses:
@@ -462,7 +463,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "create new item in the wishlist"
+              description: "create new item in the collection"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -473,7 +474,7 @@
             -
               $ref: "#/parameters/accessToken"
 
-    /{version}/{brand}/{region}/wishlist/item/{itemId}:
+    /{version}/{brand}/{region}/collection/item/{itemId}:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -484,7 +485,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "update the item length and size in the wishlist (if color is updated create new item with same itemId[call create api not update])"
+              description: "update the item length and size in the collection (if color is updated create new item with same itemId[call create api not update])"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -506,7 +507,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "Deletes item in the wishlist"
+              description: "Deletes item in the collection"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -520,7 +521,7 @@
               $ref: "#/parameters/itemId"
 
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/item/{itemId}/move:
+    /{version}/{brand}/{region}/collection/{collectionId}/item/{itemId}/move:
       put:
           tags: ["outOfScope"]
           responses:
@@ -531,7 +532,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "moves one item from one wishlist into another wishlist [call delete api on that wishlist itemid]"
+              description: "moves one item from one collection into another collection [call delete api on that collection itemid]"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -540,7 +541,7 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/wishlistId"
+              $ref: "#/parameters/collectionId"
             -
               $ref: "#/parameters/accessToken"
             -
@@ -548,7 +549,7 @@
             -
               $ref: "#/parameters/itemId"
 
-    /{version}/{brand}/{region}/wishlist/style:
+    /{version}/{brand}/{region}/collection/style:
       post:
           tags: ["Styles","POST","List"]
           responses:
@@ -559,7 +560,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "Puts a new style in the wishlist"
+              description: "Puts a new style in the collection"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -569,7 +570,7 @@
               $ref: "#/parameters/region"
             -
               $ref: "#/parameters/accessToken"
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/style/{styleId}/move:
+    /{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
         put:
           tags: ["outOfScope"]
           responses:
@@ -580,7 +581,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "moves one styles from one wishlist into another wishlist [call delete api on that wishlist styleId]"
+              description: "moves one styles from one collection into another collection [call delete api on that collection styleId]"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -589,7 +590,7 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/wishlistId"
+              $ref: "#/parameters/collectionId"
             -
               $ref: "#/parameters/accessToken"
             -
@@ -597,7 +598,7 @@
             -
               $ref: "#/parameters/target"
 
-    /{version}/{brand}/{region}/wishlist/style/{styleId}:
+    /{version}/{brand}/{region}/collection/style/{styleId}:
       delete:
           tags: ["Styles","DELETE","List"]
           responses:
@@ -608,7 +609,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "Deletes style in the wishlist"
+              description: "Deletes style in the collection"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -621,7 +622,7 @@
             -
               $ref: "#/parameters/styleId"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/entry/{entryId}/memo:
+    /{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo:
       post:
         tags: ["outOfScope"]
         responses:
@@ -641,14 +642,14 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/entryId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/entry/{entryId}/memo/{memoId}:
+    /{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo/{memoId}:
       get:
           tags: ["outOfScope"]
           responses:
@@ -659,7 +660,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "Wishlist single item details"
+              description: "collection single item details"
           parameters:
             -
               $ref: "#/parameters/version"
@@ -668,7 +669,7 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/wishlistId"
+              $ref: "#/parameters/collectionId"
             -
               $ref: "#/parameters/accessToken"
             -
@@ -695,7 +696,7 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
           -
@@ -723,7 +724,7 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
           -
@@ -731,7 +732,7 @@
           -
             $ref: "#/parameters/memoId"
 
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/comment:
+    /{version}/{brand}/{region}/collection/{collectionId}/comment:
       post:
         tags: ["outOfScope"]
         responses:
@@ -742,7 +743,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "comment for the entire wishlist"
+            description: "comment for the entire collection"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -751,12 +752,12 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/wishlist/{wishlistId}/comment/{commentId}:
+    /{version}/{brand}/{region}/collection/{collectionId}/comment/{commentId}:
       put:
         tags: ["outOfScope"]
         responses:
@@ -767,7 +768,7 @@
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "update comment for wishlist"
+            description: "update comment for collection"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -776,7 +777,7 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
           -
@@ -800,12 +801,12 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/wishlistId"
+            $ref: "#/parameters/collectionId"
           -
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/commentId"
-    /{version}/{brand}/{region}/wishlist/search:
+    /{version}/{brand}/{region}/collection/search:
       get:
           tags: ["outOfScope"]
           responses:
@@ -816,7 +817,7 @@
             403:
               description: "accessToken is expired or wrong"
             200:
-              description: "Wishlist single item details"
+              description: "collection single item details"
           parameters:
             -
               $ref: "#/parameters/version"
