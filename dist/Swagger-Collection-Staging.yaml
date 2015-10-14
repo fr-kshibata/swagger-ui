@@ -217,6 +217,31 @@
       type: "string"
       required: false
       default: "none"
+    clientId:
+      in: "query"
+      name: "clientId"
+      description: "client id to authenticate api users"
+      type: "string"
+      required: true
+    clientSecret:
+      in: "query"
+      name: "clientSecret"
+      description: "client secret to authenticate clientId"
+      type: "string"
+      required: true
+    locale:
+      in: "query"
+      name: "locale"
+      description: "language"
+      type: "string"
+      required: false
+      default: "jp"
+    callback:
+      in: "query"
+      name: "callback"
+      description: "permitters if jsonp is used"
+      type: "string"
+      required: false
     brand:
       in: "path"
       name: "brand"
@@ -357,6 +382,14 @@
             $ref: "#/parameters/storeId"
           -
             $ref: "#/parameters/type"
+          -
+            $ref: "#/parameters/clientId"
+          -
+            $ref: "#/parameters/clientSecret"
+          -
+            $ref: "#/parameters/callback"
+          -
+            $ref: "#/parameters/locale"
       put:
         tags: ["outOfScope"]
         responses:
@@ -402,6 +435,14 @@
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/type"
+          -
+            $ref: "#/parameters/clientId"
+          -
+            $ref: "#/parameters/clientSecret"
+          -
+            $ref: "#/parameters/callback"
+          -
+            $ref: "#/parameters/locale"
     /{version}/{brand}/{region}/collection/{collectionId}/clone:
       post:
         tags: ["outOfScope"]
@@ -473,6 +514,14 @@
               $ref: "#/parameters/region"
             -
               $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
 
     /{version}/{brand}/{region}/collection/item/{itemId}:
       put:
@@ -497,6 +546,14 @@
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/itemId"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
       delete:
           tags: ["Items","DELETE","List"]
           responses:
@@ -519,6 +576,14 @@
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/itemId"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
 
 
     /{version}/{brand}/{region}/collection/{collectionId}/item/{itemId}/move:
@@ -570,6 +635,14 @@
               $ref: "#/parameters/region"
             -
               $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
     /{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
         put:
           tags: ["outOfScope"]
@@ -621,6 +694,14 @@
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/styleId"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
 
     /{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo:
       post:
@@ -832,6 +913,6 @@
             -
               $ref: "#/parameters/limit"
 
-                  #TODO: search ok
+                  #TODO: search 
                   #TODO: ranking
                   #TODO: External API
