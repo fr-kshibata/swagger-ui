@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "FloorMap Api",
+    "version": "1.0.0",
+    "title": "FloorMap Api",
+    "termsOfService": "",
+    "contact": {}
+  },
+  "host": "10.4.0.83:4006",
+  "basePath": "/layout/v1/uq/us",
+  "tags": [
+    {
+      "name": "storeMap",
+      "description": "About store map details"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/storeProduct": {
+      "get": {
+        "tags": [
+          "storeMap"
+        ],
+        "summary": "Get all floor list (only name and number) for given storeID and first 3 floor's layout for given productId.",
+        "description": "Get all floor list (only name and number) for given storeID and first 3 floor's layout for given productId.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "description": "ID of store",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "ID of product",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "301": {
+            "description": "API has been moved to somewhere else."
+          },
+          "302": {
+            "description": "API has been moved to somewhere else."
+          },
+          "304": {
+            "description": "API response has not been updated yet."
+          },
+          "400": {
+            "description": "Query parameters given were not all valid."
+          },
+          "404": {
+            "description": "Requested API URL does not exist."
+          },
+          "500": {
+            "description": "API call was not successful somehow."
+          },
+          "502": {
+            "description": "Only Akamai returns this response when something was wrong."
+          },
+          "503": {
+            "description": "API is not working okay due to maintenance or not ready yet."
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "tags": [
+          "storeMap"
+        ],
+        "summary": "Get product details with floor list where the product is available.",
+        "description": "Get product details with floor list where the product is available.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "description": "ID of store",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "IDs of products",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "301": {
+            "description": "API has been moved to somewhere else."
+          },
+          "302": {
+            "description": "API has been moved to somewhere else."
+          },
+          "304": {
+            "description": "API response has not been updated yet."
+          },
+          "400": {
+            "description": "Query parameters given were not all valid."
+          },
+          "404": {
+            "description": "Requested API URL does not exist."
+          },
+          "500": {
+            "description": "API call was not successful somehow."
+          },
+          "502": {
+            "description": "Only Akamai returns this response when something was wrong."
+          },
+          "503": {
+            "description": "API is not working okay due to maintenance or not ready yet."
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/floorLayout": {
+      "get": {
+        "tags": [
+          "storeMap"
+        ],
+        "summary": "Get floor layout for given store's floorIds.",
+        "description": "Get floor layout for given store's floorIds.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "description": "ID of store",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "floorId",
+            "in": "query",
+            "description": "ID of floor",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "301": {
+            "description": "API has been moved to somewhere else."
+          },
+          "302": {
+            "description": "API has been moved to somewhere else."
+          },
+          "304": {
+            "description": "API response has not been updated yet."
+          },
+          "400": {
+            "description": "Query parameters given were not all valid."
+          },
+          "404": {
+            "description": "Requested API URL does not exist."
+          },
+          "500": {
+            "description": "API call was not successful somehow."
+          },
+          "502": {
+            "description": "Only Akamai returns this response when something was wrong."
+          },
+          "503": {
+            "description": "API is not working okay due to maintenance or not ready yet."
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/storeMap": {
+      "get": {
+        "tags": [
+          "storeMap"
+        ],
+        "summary": "Get store data with full floor's layout for given storeId.",
+        "description": "Get store data with full floor's layout for given storeId.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "description": "ID of store",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API call is successfully processed."
+          },
+          "301": {
+            "description": "API has been moved to somewhere else."
+          },
+          "302": {
+            "description": "API has been moved to somewhere else."
+          },
+          "304": {
+            "description": "API response has not been updated yet."
+          },
+          "400": {
+            "description": "Query parameters given were not all valid."
+          },
+          "404": {
+            "description": "Requested API URL does not exist."
+          },
+          "500": {
+            "description": "API call was not successful somehow."
+          },
+          "502": {
+            "description": "Only Akamai returns this response when something was wrong."
+          },
+          "503": {
+            "description": "API is not working okay due to maintenance or not ready yet."
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/storeFloor": {
+      "get": {
+        "tags": [
+          "storeMap"
+        ],
+        "summary": "Get list of floors for given storeId.",
+        "description": "Get list of floors for the given storeId.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "description": "ID of store",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "301": {
+            "description": "API has been moved to somewhere else."
+          },
+          "302": {
+            "description": "API has been moved to somewhere else."
+          },
+          "304": {
+            "description": "API response has not been updated yet."
+          },
+          "400": {
+            "description": "Query parameters given were not all valid."
+          },
+          "404": {
+            "description": "Requested API URL does not exist."
+          },
+          "500": {
+            "description": "API call was not successful somehow."
+          },
+          "502": {
+            "description": "Only Akamai returns this response when something was wrong."
+          },
+          "503": {
+            "description": "API is not working okay due to maintenance or not ready yet."
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/storeStatus": {
+      "get": {
+        "tags": [
+          "storeMap"
+        ],
+        "summary": "Get status of given store.",
+        "description": "Get status of given store.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "storeId",
+            "in": "query",
+            "description": "ID of store",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "301": {
+            "description": "API has been moved to somewhere else."
+          },
+          "302": {
+            "description": "API has been moved to somewhere else."
+          },
+          "304": {
+            "description": "API response has not been updated yet."
+          },
+          "400": {
+            "description": "Query parameters given were not all valid."
+          },
+          "404": {
+            "description": "Requested API URL does not exist."
+          },
+          "500": {
+            "description": "API call was not successful somehow."
+          },
+          "502": {
+            "description": "Only Akamai returns this response when something was wrong."
+          },
+          "503": {
+            "description": "API is not working okay due to maintenance or not ready yet."
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  }
+}
