@@ -257,6 +257,9 @@
         - "jb"
         - "fr"
         - "uq-gu"
+        - "theory"
+        - "ptt"
+        - "plst"
     region:
       in: "path"
       name: "region"
@@ -913,6 +916,6 @@
             -
               $ref: "#/parameters/limit"
 
-                  #TODO: search 
+                  #TODO: search
                   #TODO: ranking
                   #TODO: External API

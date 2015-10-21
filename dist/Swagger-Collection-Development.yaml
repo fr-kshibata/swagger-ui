@@ -1,4 +1,4 @@
----Not used
+---
   swagger: "2.0"
   info:
     version: "v1"
@@ -217,6 +217,31 @@
       type: "string"
       required: false
       default: "none"
+    clientId:
+      in: "query"
+      name: "clientId"
+      description: "client id to authenticate api users"
+      type: "string"
+      required: true
+    clientSecret:
+      in: "query"
+      name: "clientSecret"
+      description: "client secret to authenticate clientId"
+      type: "string"
+      required: true
+    locale:
+      in: "query"
+      name: "locale"
+      description: "language"
+      type: "string"
+      required: false
+      default: "jp"
+    callback:
+      in: "query"
+      name: "callback"
+      description: "permitters if jsonp is used"
+      type: "string"
+      required: false
     brand:
       in: "path"
       name: "brand"
@@ -230,6 +255,11 @@
         - "cdc"
         - "ltc"
         - "jb"
+        - "fr"
+        - "uq-gu"
+        - "theory"
+        - "ptt"
+        - "plst"
     region:
       in: "path"
       name: "region"
@@ -276,13 +306,14 @@
 
   paths:
     /{version}/{brand}/{region}/collections:
+      description: "displays all collections"
       get:
-        tags: ["collection","GET","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -302,7 +333,7 @@
             $ref: "#/parameters/orderBy"
     /{version}/{brand}/{region}/collection:
       post:
-        tags: ["collection","POST","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
@@ -329,18 +360,18 @@
             $ref: "#/parameters/description"
 
 
-    /{version}/{brand}/{region}/collection/{collectionId}:
+    /{version}/{brand}/{region}/collection/:
       get:
         tags: ["collection","GET","List"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "view single collection"
+            description: "view either one of the default collection [style or items]"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -349,18 +380,26 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/collectionId"
-          -
             $ref: "#/parameters/accessToken"
           -
             $ref: "#/parameters/storeId"
+          -
+            $ref: "#/parameters/type"
+          -
+            $ref: "#/parameters/clientId"
+          -
+            $ref: "#/parameters/clientSecret"
+          -
+            $ref: "#/parameters/callback"
+          -
+            $ref: "#/parameters/locale"
       put:
-        tags: ["collection","PUT","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -383,11 +422,11 @@
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
-            description: "Delete the collection"
+            description: "Delete the collection contents for the specific type (collection itself is not deletedas)"
         parameters:
           -
             $ref: "#/parameters/version"
@@ -396,17 +435,25 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/collectionId"
-          -
             $ref: "#/parameters/accessToken"
+          -
+            $ref: "#/parameters/type"
+          -
+            $ref: "#/parameters/clientId"
+          -
+            $ref: "#/parameters/clientSecret"
+          -
+            $ref: "#/parameters/callback"
+          -
+            $ref: "#/parameters/locale"
     /{version}/{brand}/{region}/collection/{collectionId}/clone:
       post:
-        tags: ["collection","POST","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -425,12 +472,12 @@
 
     /{version}/{brand}/{region}/collection/{collectionId}/merge:
       put:
-        tags: ["collection","PUT","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found cannot merge"
+            description: "user Id not found cannot merge"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -449,14 +496,14 @@
           -
             $ref: "#/parameters/accessToken"
 
-    /{version}/{brand}/{region}/collection/{collectionId}/item:
+    /{version}/{brand}/{region}/collection/item:
       post:
           tags: ["Items","POST","List"]
           responses:
             400:
               description: "invalid parameters item cannot be accessed"
             404:
-              description: "collection id not found or item id not found"
+              description: "user Id not found or item id not found"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -469,18 +516,24 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/collectionId"
-            -
               $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
 
-    /{version}/{brand}/{region}/collection/{collectionId}/item/{itemId}:
+    /{version}/{brand}/{region}/collection/item/{itemId}:
       put:
           tags: ["Items","PUT","List"]
           responses:
             400:
               description: "invalid parameters something went wrong getting the item"
             404:
-              description: "collection id not found or target id not found"
+              description: "user Id not found or target id not found"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -493,20 +546,24 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/collectionId"
-            -
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/itemId"
             -
-              $ref: "#/parameters/target"
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
       delete:
           tags: ["Items","DELETE","List"]
           responses:
             400:
               description: "invalid parameters cannot delete"
             404:
-              description: "collection id not found id is not valid"
+              description: "user Id not found id is not valid"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -519,21 +576,27 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/collectionId"
-            -
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/itemId"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
 
 
     /{version}/{brand}/{region}/collection/{collectionId}/item/{itemId}/move:
       put:
-          tags: ["Items","PUT","List"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
             404:
-              description: "collection id not found cannot move the item"
+              description: "user Id not found cannot move the item"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -554,14 +617,14 @@
             -
               $ref: "#/parameters/itemId"
 
-    /{version}/{brand}/{region}/collection/{collectionId}/style:
+    /{version}/{brand}/{region}/collection/style:
       post:
           tags: ["Styles","POST","List"]
           responses:
             400:
               description: "invalid parameters"
             404:
-              description: "collection id not found"
+              description: "user Id not found"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -574,17 +637,23 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/collectionId"
-            -
               $ref: "#/parameters/accessToken"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
     /{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
         put:
-          tags: ["Styles","PUT","List"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
             404:
-              description: "collection id not found"
+              description: "user Id not found"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -605,14 +674,14 @@
             -
               $ref: "#/parameters/target"
 
-    /{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}:
+    /{version}/{brand}/{region}/collection/style/{styleId}:
       delete:
           tags: ["Styles","DELETE","List"]
           responses:
             400:
               description: "invalid parameters"
             404:
-              description: "collection id not found"
+              description: "user Id not found"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -625,20 +694,26 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/collectionId"
-            -
               $ref: "#/parameters/accessToken"
             -
               $ref: "#/parameters/styleId"
+            -
+              $ref: "#/parameters/clientId"
+            -
+              $ref: "#/parameters/clientSecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
 
     /{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo:
       post:
-        tags: ["Memo","POST","List","entry"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -660,12 +735,12 @@
           #   $ref: "#/parameters/"
     /{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo/{memoId}:
       get:
-          tags: ["Memo","GET","List","entry"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
             404:
-              description: "collection id not found"
+              description: "user Id not found"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -687,12 +762,12 @@
               $ref: "#/parameters/entryId"
 
       put:
-        tags: ["Memo","PUT","List","entry"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -715,12 +790,12 @@
           # -
           #   $ref: "#/parameters/"
       delete:
-        tags: ["Memo","Items","DELETE","List","entry"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -743,12 +818,12 @@
 
     /{version}/{brand}/{region}/collection/{collectionId}/comment:
       post:
-        tags: ["Comment","POST","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -768,12 +843,12 @@
           #   $ref: "#/parameters/"
     /{version}/{brand}/{region}/collection/{collectionId}/comment/{commentId}:
       put:
-        tags: ["Comment","PUT","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -792,12 +867,12 @@
           -
             $ref: "#/parameters/commentId"
       delete:
-        tags: ["Comment","DELETE","List"]
+        tags: ["outOfScope"]
         responses:
           400:
             description: "invalid parameters"
           404:
-            description: "collection id not found"
+            description: "user Id not found"
           403:
             description: "accessToken is expired or wrong"
           200:
@@ -817,12 +892,12 @@
             $ref: "#/parameters/commentId"
     /{version}/{brand}/{region}/collection/search:
       get:
-          tags: ["Search","GET","List"]
+          tags: ["outOfScope"]
           responses:
             400:
               description: "invalid parameters"
             404:
-              description: "collection id not found"
+              description: "user Id not found"
             403:
               description: "accessToken is expired or wrong"
             200:
@@ -841,6 +916,6 @@
             -
               $ref: "#/parameters/limit"
 
-                  #TODO: search ok
+                  #TODO: search
                   #TODO: ranking
                   #TODO: External API
