@@ -8,7 +8,7 @@
       name: "collection PF Team"
       url: "http://itwiki.g1.frgroup/display/DM/03.+APIs"
       email: "kristian.faeldt@fastretailing.com"
-  host: "api.fastretailing.com"
+  host: "http://localhost:8080/"
   basePath: "/collection"
   schemes:
     - "https"
@@ -52,8 +52,8 @@
       enum:
         - "true"
         - "false"
-    accessToken:
-      name: "accessToken"
+    accesstoken:
+      name: "accesstoken"
       in: "query"
       description: "Identifies the user"
       type: "string"
@@ -217,17 +217,17 @@
       type: "string"
       required: false
       default: "none"
-    clientId:
+    clientid:
       in: "query"
-      name: "clientId"
+      name: "clientid"
       description: "client id to authenticate api users"
       type: "string"
       required: true
       default: "gds-default"
-    clientSecret:
+    clientsecret:
       in: "query"
-      name: "clientSecret"
-      description: "client secret to authenticate clientId"
+      name: "clientsecret"
+      description: "client secret to authenticate clientid"
       type: "string"
       required: true
       default: "gds-default"
@@ -317,7 +317,7 @@
           404:
             description: "user Id not found not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "Show all collections"
         parameters:
@@ -330,7 +330,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/orderBy"
     /{version}/{brand}/{region}/collection:
@@ -342,7 +342,7 @@
           404:
             description: "title not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "Create the collection"
         parameters:
@@ -353,7 +353,7 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/type"
           -
@@ -371,7 +371,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "view either one of the default collection [style or items]"
         parameters:
@@ -382,15 +382,15 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/storeId"
           -
             $ref: "#/parameters/type"
           -
-            $ref: "#/parameters/clientId"
+            $ref: "#/parameters/clientid"
           -
-            $ref: "#/parameters/clientSecret"
+            $ref: "#/parameters/clientsecret"
           -
             $ref: "#/parameters/callback"
           -
@@ -403,7 +403,7 @@
           404:
             description: "user id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "Update the collection"
         parameters:
@@ -416,7 +416,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
 
       delete:
         tags: ["collection","DELETE","List"]
@@ -426,7 +426,7 @@
           404:
             description: "user id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "Delete the collection contents for the specific type (collection itself is not deletedas)"
         parameters:
@@ -437,13 +437,13 @@
           -
             $ref: "#/parameters/region"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/type"
           -
-            $ref: "#/parameters/clientId"
+            $ref: "#/parameters/clientid"
           -
-            $ref: "#/parameters/clientSecret"
+            $ref: "#/parameters/clientsecret"
           -
             $ref: "#/parameters/callback"
           -
@@ -457,7 +457,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "Clone the collection"
         parameters:
@@ -470,7 +470,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
 
     /{version}/{brand}/{region}/collection/{collectionId}/merge:
       put:
@@ -481,7 +481,7 @@
           404:
             description: "user Id not found cannot merge"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "Merge the collection"
         parameters:
@@ -496,7 +496,7 @@
           -
             $ref: "#/parameters/target"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
 
     /{version}/{brand}/{region}/collection/item:
       post:
@@ -507,7 +507,7 @@
             404:
               description: "user Id not found or item id not found"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "create new item in the collection"
           parameters:
@@ -518,11 +518,11 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
-              $ref: "#/parameters/clientId"
+              $ref: "#/parameters/clientid"
             -
-              $ref: "#/parameters/clientSecret"
+              $ref: "#/parameters/clientsecret"
             -
               $ref: "#/parameters/callback"
             -
@@ -537,7 +537,7 @@
             404:
               description: "user Id not found or target id not found"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "update the item length and size in the collection (if color is updated create new item with same itemId[call create api not update])"
           parameters:
@@ -548,13 +548,13 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
               $ref: "#/parameters/itemId"
             -
-              $ref: "#/parameters/clientId"
+              $ref: "#/parameters/clientid"
             -
-              $ref: "#/parameters/clientSecret"
+              $ref: "#/parameters/clientsecret"
             -
               $ref: "#/parameters/callback"
             -
@@ -567,7 +567,7 @@
             404:
               description: "user Id not found id is not valid"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "Deletes item in the collection"
           parameters:
@@ -578,13 +578,13 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
               $ref: "#/parameters/itemId"
             -
-              $ref: "#/parameters/clientId"
+              $ref: "#/parameters/clientid"
             -
-              $ref: "#/parameters/clientSecret"
+              $ref: "#/parameters/clientsecret"
             -
               $ref: "#/parameters/callback"
             -
@@ -600,7 +600,7 @@
             404:
               description: "user Id not found cannot move the item"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "moves one item from one collection into another collection [call delete api on that collection itemid]"
           parameters:
@@ -613,7 +613,7 @@
             -
               $ref: "#/parameters/collectionId"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
               $ref: "#/parameters/target"
             -
@@ -628,7 +628,7 @@
             404:
               description: "user Id not found"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "Puts a new style in the collection"
           parameters:
@@ -639,11 +639,11 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
-              $ref: "#/parameters/clientId"
+              $ref: "#/parameters/clientid"
             -
-              $ref: "#/parameters/clientSecret"
+              $ref: "#/parameters/clientsecret"
             -
               $ref: "#/parameters/callback"
             -
@@ -657,7 +657,7 @@
             404:
               description: "user Id not found"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "moves one styles from one collection into another collection [call delete api on that collection styleId]"
           parameters:
@@ -670,7 +670,7 @@
             -
               $ref: "#/parameters/collectionId"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
               $ref: "#/parameters/styleId"
             -
@@ -685,7 +685,7 @@
             404:
               description: "user Id not found"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "Deletes style in the collection"
           parameters:
@@ -696,13 +696,13 @@
             -
               $ref: "#/parameters/region"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
               $ref: "#/parameters/styleId"
             -
-              $ref: "#/parameters/clientId"
+              $ref: "#/parameters/clientid"
             -
-              $ref: "#/parameters/clientSecret"
+              $ref: "#/parameters/clientsecret"
             -
               $ref: "#/parameters/callback"
             -
@@ -717,7 +717,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "add memo for the individual item"
         parameters:
@@ -730,7 +730,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/entryId"
           # -
@@ -744,7 +744,7 @@
             404:
               description: "user Id not found"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "collection single item details"
           parameters:
@@ -757,7 +757,7 @@
             -
               $ref: "#/parameters/collectionId"
             -
-              $ref: "#/parameters/accessToken"
+              $ref: "#/parameters/accesstoken"
             -
               $ref: "#/parameters/memoId"
             -
@@ -771,7 +771,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "update memo for the individual entry"
         parameters:
@@ -784,7 +784,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/entryId"
           -
@@ -799,7 +799,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "delete memo for the individual entry"
         parameters:
@@ -812,7 +812,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/entryId"
           -
@@ -827,7 +827,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "comment for the entire collection"
         parameters:
@@ -840,7 +840,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           # -
           #   $ref: "#/parameters/"
     /{version}/{brand}/{region}/collection/{collectionId}/comment/{commentId}:
@@ -852,7 +852,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "update comment for collection"
         parameters:
@@ -865,7 +865,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/commentId"
       delete:
@@ -876,7 +876,7 @@
           404:
             description: "user Id not found"
           403:
-            description: "accessToken is expired or wrong"
+            description: "accesstoken is expired or wrong"
           200:
             description: "memo for individual styles"
         parameters:
@@ -889,7 +889,7 @@
           -
             $ref: "#/parameters/collectionId"
           -
-            $ref: "#/parameters/accessToken"
+            $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/commentId"
     /{version}/{brand}/{region}/collection/search:
@@ -901,7 +901,7 @@
             404:
               description: "user Id not found"
             403:
-              description: "accessToken is expired or wrong"
+              description: "accesstoken is expired or wrong"
             200:
               description: "collection single item details"
           parameters:
