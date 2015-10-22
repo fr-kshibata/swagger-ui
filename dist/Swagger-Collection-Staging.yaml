@@ -223,12 +223,14 @@
       description: "client id to authenticate api users"
       type: "string"
       required: true
+      default: "gds-default"
     clientSecret:
       in: "query"
       name: "clientSecret"
       description: "client secret to authenticate clientId"
       type: "string"
       required: true
+      default: "gds-default"
     locale:
       in: "query"
       name: "locale"
