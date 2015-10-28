@@ -223,14 +223,14 @@
       description: "client id to authenticate api users"
       type: "string"
       required: true
-      default: "gds-default"
+      default: "gds-jp"
     clientsecret:
       in: "query"
       name: "clientsecret"
       description: "client secret to authenticate clientid"
       type: "string"
       required: true
-      default: "gds-default"
+      default: "gds"
     locale:
       in: "query"
       name: "locale"
@@ -238,6 +238,14 @@
       type: "string"
       required: false
       default: "jp"
+    id:
+      in: "query"
+      name: "id"
+      description: "skuid"
+      type: "string"
+      required: true
+      default: "155483-09-003-000"
+
     callback:
       in: "query"
       name: "callback"
@@ -307,7 +315,7 @@
         - "v10"
 
   paths:
-    /{version}/{brand}/{region}/collections:
+    /{version}/{brand}/{region}/collections/:
       description: "displays all collections"
       get:
         tags: ["outOfScope"]
@@ -333,7 +341,6 @@
             $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/orderBy"
-    /{version}/{brand}/{region}/collection:
       post:
         tags: ["outOfScope"]
         responses:
@@ -362,7 +369,7 @@
             $ref: "#/parameters/description"
 
 
-    /{version}/{brand}/{region}/collection/:
+    /{version}/{brand}/{region}/collection:
       get:
         tags: ["collection","GET","List"]
         responses:
@@ -526,6 +533,8 @@
             -
               $ref: "#/parameters/callback"
             -
+              $ref: "#/parameters/id"
+            -
               $ref: "#/parameters/locale"
 
     /{version}/{brand}/{region}/collection/item/{itemId}:
@@ -550,7 +559,7 @@
             -
               $ref: "#/parameters/accesstoken"
             -
-              $ref: "#/parameters/itemId"
+              $ref: "#/parameters/id"
             -
               $ref: "#/parameters/clientid"
             -
