@@ -315,7 +315,7 @@
         - "v10"
 
   paths:
-    /{version}/{brand}/{region}/collections/:
+    /collection/{version}/{brand}/{region}/collections/:
       description: "displays all collections"
       get:
         tags: ["outOfScope"]
@@ -369,7 +369,7 @@
             $ref: "#/parameters/description"
 
 
-    /{version}/{brand}/{region}/collection:
+    /collection/{version}/{brand}/{region}/collection:
       get:
         tags: ["collection","GET","List"]
         responses:
@@ -455,7 +455,7 @@
             $ref: "#/parameters/callback"
           -
             $ref: "#/parameters/locale"
-    /{version}/{brand}/{region}/collection/{collectionId}/clone:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/clone:
       post:
         tags: ["outOfScope"]
         responses:
@@ -479,7 +479,7 @@
           -
             $ref: "#/parameters/accesstoken"
 
-    /{version}/{brand}/{region}/collection/{collectionId}/merge:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/merge:
       put:
         tags: ["outOfScope"]
         responses:
@@ -505,7 +505,7 @@
           -
             $ref: "#/parameters/accesstoken"
 
-    /{version}/{brand}/{region}/collection/item:
+    /collection/{version}/{brand}/{region}/collection/item:
       post:
           tags: ["Items","POST","List"]
           responses:
@@ -537,7 +537,7 @@
             -
               $ref: "#/parameters/locale"
 
-    /{version}/{brand}/{region}/collection/item/{itemId}:
+    /collection/{version}/{brand}/{region}/collection/item/{skuid}:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -559,7 +559,7 @@
             -
               $ref: "#/parameters/accesstoken"
             -
-              $ref: "#/parameters/id"
+              $ref: "#/parameters/skuid"
             -
               $ref: "#/parameters/clientid"
             -
@@ -589,7 +589,7 @@
             -
               $ref: "#/parameters/accesstoken"
             -
-              $ref: "#/parameters/itemId"
+              $ref: "#/parameters/skuid"
             -
               $ref: "#/parameters/clientid"
             -
@@ -600,7 +600,7 @@
               $ref: "#/parameters/locale"
 
 
-    /{version}/{brand}/{region}/collection/{collectionId}/item/{itemId}/move:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/item/{itemId}/move:
       put:
           tags: ["outOfScope"]
           responses:
@@ -628,7 +628,7 @@
             -
               $ref: "#/parameters/itemId"
 
-    /{version}/{brand}/{region}/collection/style:
+    /collection/{version}/{brand}/{region}/collection/style:
       post:
           tags: ["Styles","POST","List"]
           responses:
@@ -657,7 +657,7 @@
               $ref: "#/parameters/callback"
             -
               $ref: "#/parameters/locale"
-    /{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
         put:
           tags: ["outOfScope"]
           responses:
@@ -685,7 +685,7 @@
             -
               $ref: "#/parameters/target"
 
-    /{version}/{brand}/{region}/collection/style/{styleId}:
+    /collection/{version}/{brand}/{region}/collection/style/{styleId}:
       delete:
           tags: ["Styles","DELETE","List"]
           responses:
@@ -717,7 +717,7 @@
             -
               $ref: "#/parameters/locale"
 
-    /{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo:
       post:
         tags: ["outOfScope"]
         responses:
@@ -744,7 +744,7 @@
             $ref: "#/parameters/entryId"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo/{memoId}:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo/{memoId}:
       get:
           tags: ["outOfScope"]
           responses:
@@ -827,7 +827,7 @@
           -
             $ref: "#/parameters/memoId"
 
-    /{version}/{brand}/{region}/collection/{collectionId}/comment:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/comment:
       post:
         tags: ["outOfScope"]
         responses:
@@ -852,7 +852,7 @@
             $ref: "#/parameters/accesstoken"
           # -
           #   $ref: "#/parameters/"
-    /{version}/{brand}/{region}/collection/{collectionId}/comment/{commentId}:
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/comment/{commentId}:
       put:
         tags: ["outOfScope"]
         responses:
@@ -901,7 +901,7 @@
             $ref: "#/parameters/accesstoken"
           -
             $ref: "#/parameters/commentId"
-    /{version}/{brand}/{region}/collection/search:
+    /collection/{version}/{brand}/{region}/collection/search:
       get:
           tags: ["outOfScope"]
           responses:
