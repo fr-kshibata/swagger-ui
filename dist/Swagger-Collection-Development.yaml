@@ -8,10 +8,10 @@
       name: "collection PF Team"
       url: "http://itwiki.g1.frgroup/display/DM/03.+APIs"
       email: "kristian.faeldt@fastretailing.com"
-  host: "http://localhost:8080/"
-  basePath: "/collection"
+  host: "localhost:8888"
+  # basePath: "/collection"
   schemes:
-    - "https"
+    - "http"
   consumes:
     - "application/json"
   produces:
@@ -245,7 +245,13 @@
       type: "string"
       required: true
       default: "155483-09-003-000"
-
+    skuid:
+      in: "path"
+      name: "skuid"
+      description: "skuid"
+      type: "string"
+      required: true
+      default: "155483-09-003-000"
     callback:
       in: "query"
       name: "callback"
@@ -369,7 +375,7 @@
             $ref: "#/parameters/description"
 
 
-    /collection/{version}/{brand}/{region}/collection:
+    /{version}/{brand}/{region}/collection:
       get:
         tags: ["collection","GET","List"]
         responses:
@@ -505,7 +511,7 @@
           -
             $ref: "#/parameters/accesstoken"
 
-    /collection/{version}/{brand}/{region}/collection/item:
+    /{version}/{brand}/{region}/collection/item/{skuId}:
       post:
           tags: ["Items","POST","List"]
           responses:
@@ -533,11 +539,10 @@
             -
               $ref: "#/parameters/callback"
             -
-              $ref: "#/parameters/id"
+              $ref: "#/parameters/skuid"
             -
               $ref: "#/parameters/locale"
 
-    /collection/{version}/{brand}/{region}/collection/item/{itemId}:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -559,7 +564,7 @@
             -
               $ref: "#/parameters/accesstoken"
             -
-              $ref: "#/parameters/id"
+              $ref: "#/parameters/skuid"
             -
               $ref: "#/parameters/clientid"
             -
@@ -589,7 +594,7 @@
             -
               $ref: "#/parameters/accesstoken"
             -
-              $ref: "#/parameters/itemId"
+              $ref: "#/parameters/skuid"
             -
               $ref: "#/parameters/clientid"
             -
@@ -628,7 +633,7 @@
             -
               $ref: "#/parameters/itemId"
 
-    /collection/{version}/{brand}/{region}/collection/style:
+    /{version}/{brand}/{region}/collection/style/{styleId}:
       post:
           tags: ["Styles","POST","List"]
           responses:
@@ -657,35 +662,6 @@
               $ref: "#/parameters/callback"
             -
               $ref: "#/parameters/locale"
-    /collection/{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
-        put:
-          tags: ["outOfScope"]
-          responses:
-            400:
-              description: "invalid parameters"
-            404:
-              description: "user Id not found"
-            403:
-              description: "accesstoken is expired or wrong"
-            200:
-              description: "moves one styles from one collection into another collection [call delete api on that collection styleId]"
-          parameters:
-            -
-              $ref: "#/parameters/version"
-            -
-              $ref: "#/parameters/brand"
-            -
-              $ref: "#/parameters/region"
-            -
-              $ref: "#/parameters/collectionId"
-            -
-              $ref: "#/parameters/accesstoken"
-            -
-              $ref: "#/parameters/styleId"
-            -
-              $ref: "#/parameters/target"
-
-    /collection/{version}/{brand}/{region}/collection/style/{styleId}:
       delete:
           tags: ["Styles","DELETE","List"]
           responses:
@@ -716,6 +692,35 @@
               $ref: "#/parameters/callback"
             -
               $ref: "#/parameters/locale"
+
+    /collection/{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
+        put:
+          tags: ["outOfScope"]
+          responses:
+            400:
+              description: "invalid parameters"
+            404:
+              description: "user Id not found"
+            403:
+              description: "accesstoken is expired or wrong"
+            200:
+              description: "moves one styles from one collection into another collection [call delete api on that collection styleId]"
+          parameters:
+            -
+              $ref: "#/parameters/version"
+            -
+              $ref: "#/parameters/brand"
+            -
+              $ref: "#/parameters/region"
+            -
+              $ref: "#/parameters/collectionId"
+            -
+              $ref: "#/parameters/accesstoken"
+            -
+              $ref: "#/parameters/styleId"
+            -
+              $ref: "#/parameters/target"
+
 
     /collection/{version}/{brand}/{region}/collection/{collectionId}/entry/{entryId}/memo:
       post:

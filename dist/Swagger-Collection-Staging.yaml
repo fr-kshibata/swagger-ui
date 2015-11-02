@@ -8,8 +8,8 @@
       name: "collection PF Team"
       url: "http://itwiki.g1.frgroup/display/DM/03.+APIs"
       email: "kristian.faeldt@fastretailing.com"
-  host: "http://localhost:8080/"
-  basePath: "/collection"
+  host: "stage-api.fastretailing.com"
+  # basePath: "/collection"
   schemes:
     - "https"
   consumes:
@@ -25,8 +25,8 @@
       required: true
       default: "items"
       enum:
-        - "items"
-        - "styles"
+        - "item"
+        - "style"
     collectionId:
       name: "collectionId"
       in: "path"
@@ -92,7 +92,7 @@
       name: "styleId"
       description: "identifies the styles"
       type: "string"
-      default: "4321"
+      default: "6415"
       required: true
     listStyleId:
       in: "query"
@@ -245,7 +245,13 @@
       type: "string"
       required: true
       default: "155483-09-003-000"
-
+    skuid:
+      in: "path"
+      name: "skuid"
+      description: "skuid"
+      type: "string"
+      required: true
+      default: "155483-09-003-000"
     callback:
       in: "query"
       name: "callback"
@@ -301,7 +307,7 @@
       description: "version 1,2,3,4,5,6"
       required: true
       type: "string"
-      default: "v1"
+      default: "v2"
       enum:
         - "v1"
         - "v2"
@@ -505,7 +511,7 @@
           -
             $ref: "#/parameters/accesstoken"
 
-    /collection/{version}/{brand}/{region}/collection/item:
+    /collection/{version}/{brand}/{region}/collection/item/{skuId}:
       post:
           tags: ["Items","POST","List"]
           responses:
@@ -533,11 +539,10 @@
             -
               $ref: "#/parameters/callback"
             -
-              $ref: "#/parameters/id"
+              $ref: "#/parameters/skuid"
             -
               $ref: "#/parameters/locale"
 
-    /collection/{version}/{brand}/{region}/collection/item/{skuid}:
       put:
           tags: ["Items","PUT","List"]
           responses:
@@ -628,35 +633,6 @@
             -
               $ref: "#/parameters/itemId"
 
-    /collection/{version}/{brand}/{region}/collection/style:
-      post:
-          tags: ["Styles","POST","List"]
-          responses:
-            400:
-              description: "invalid parameters"
-            404:
-              description: "user Id not found"
-            403:
-              description: "accesstoken is expired or wrong"
-            200:
-              description: "Puts a new style in the collection"
-          parameters:
-            -
-              $ref: "#/parameters/version"
-            -
-              $ref: "#/parameters/brand"
-            -
-              $ref: "#/parameters/region"
-            -
-              $ref: "#/parameters/accesstoken"
-            -
-              $ref: "#/parameters/clientid"
-            -
-              $ref: "#/parameters/clientsecret"
-            -
-              $ref: "#/parameters/callback"
-            -
-              $ref: "#/parameters/locale"
     /collection/{version}/{brand}/{region}/collection/{collectionId}/style/{styleId}/move:
         put:
           tags: ["outOfScope"]
@@ -686,6 +662,36 @@
               $ref: "#/parameters/target"
 
     /collection/{version}/{brand}/{region}/collection/style/{styleId}:
+      post:
+          tags: ["Styles","POST","List"]
+          responses:
+            400:
+              description: "invalid parameters"
+            404:
+              description: "user Id not found"
+            403:
+              description: "accesstoken is expired or wrong"
+            200:
+              description: "Puts a new style in the collection"
+          parameters:
+            -
+              $ref: "#/parameters/version"
+            -
+              $ref: "#/parameters/brand"
+            -
+              $ref: "#/parameters/region"
+            -
+              $ref: "#/parameters/accesstoken"
+            -
+              $ref: "#/parameters/styleId"
+            -
+              $ref: "#/parameters/clientid"
+            -
+              $ref: "#/parameters/clientsecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
       delete:
           tags: ["Styles","DELETE","List"]
           responses:
