@@ -136,11 +136,11 @@
       description: "where the pagination starts"
       type: "integer"
     storeId:
-      in: "query"
-      name: "storeId"
+      in: "path"
+      name: "store_id"
       description: "store Id for in store mode if null then default to the normal e-c site prices"
       type: "string"
-      default: "null"
+      default: "10101064"
     sort:
       in: "query"
       name: "sort"
@@ -931,37 +931,136 @@
               $ref: "#/parameters/offset"
             -
               $ref: "#/parameters/limit"
-    /collection/{version}/{brand}/{region}/collection/store/{store_id}:
+    # /collection/{version}/{brand}/{region}/collection/store/{store_id}:
+    #   get:
+    #       tags: ["List","Store","GET"]
+    #       responses:
+    #         400:
+    #           description: "invalid parameters"
+    #         404:
+    #           description: "user Id not found"
+    #         403:
+    #           description: "accesstoken is expired or wrong"
+    #         200:
+    #           description: "collection single item details"
+    #       parameters:
+    #         -
+    #           $ref: "#/parameters/version"
+    #         -
+    #           $ref: "#/parameters/brand"
+    #         -
+    #           $ref: "#/parameters/region"
+    #         -
+    #           $ref: "#/parameters/accesstoken"
+    #         -
+    #           $ref: "#/parameters/skuid"
+    #         -
+    #           $ref: "#/parameters/store_id"
+    #         -
+    #           $ref: "#/parameters/clientid"
+    #         -
+    #           $ref: "#/parameters/clientsecret"
+    #         -
+    #           $ref: "#/parameters/callback"
+    #         -
+    #           $ref: "#/parameters/locale"
+    #     delete:
+    #       tags: ["List","Store","DELETE"]
+    #       responses:
+    #         400:
+    #           description: "invalid parameters"
+    #         404:
+    #           description: "user Id not found"
+    #         403:
+    #           description: "accesstoken is expired or wrong"
+    #         200:
+    #           description: "collection single item details"
+    #       parameters:
+    #         -
+    #           $ref: "#/parameters/version"
+    #         -
+    #           $ref: "#/parameters/brand"
+    #         -
+    #           $ref: "#/parameters/region"
+    #         -
+    #           $ref: "#/parameters/accesstoken"
+    #         -
+    #           $ref: "#/parameters/skuid"
+    #         -
+    #           $ref: "#/parameters/store_id"
+    #         -
+    #           $ref: "#/parameters/clientid"
+    #         -
+    #           $ref: "#/parameters/clientsecret"
+    #         -
+    #           $ref: "#/parameters/callback"
+    #         -
+    #           $ref: "#/parameters/locale"
+    /{version}/{brand}/{region}/collection/store/{store_id}:
       get:
-          tags: ["List","Store"]
-          responses:
-            400:
-              description: "invalid parameters"
-            404:
-              description: "user Id not found"
-            403:
-              description: "accesstoken is expired or wrong"
-            200:
-              description: "collection single item details"
-          parameters:
-            -
-              $ref: "#/parameters/version"
-            -
-              $ref: "#/parameters/brand"
-            -
-              $ref: "#/parameters/region"
-            -
-              $ref: "#/parameters/accesstoken"
-            -
-              $ref: "#/parameters/skuid"
-            -
-              $ref: "#/parameters/clientid"
-            -
-              $ref: "#/parameters/clientsecret"
-            -
-              $ref: "#/parameters/callback"
-            -
-              $ref: "#/parameters/locale"
+        tags: ["Store","GET","List"]
+        responses:
+          400:
+            description: "invalid parameters"
+          404:
+            description: "user Id not found"
+          403:
+            description: "accesstoken is expired or wrong"
+          200:
+            description: "view either one of the default collection [style or items]"
+        parameters:
+          -
+            $ref: "#/parameters/version"
+          -
+            $ref: "#/parameters/brand"
+          -
+            $ref: "#/parameters/region"
+          -
+            $ref: "#/parameters/accesstoken"
+          -
+            $ref: "#/parameters/storeId"
+          -
+            $ref: "#/parameters/type"
+          -
+            $ref: "#/parameters/clientid"
+          -
+            $ref: "#/parameters/clientsecret"
+          -
+            $ref: "#/parameters/callback"
+          -
+            $ref: "#/parameters/locale"
+      delete:
+        tags: ["Store","DELETE","List"]
+        responses:
+          400:
+            description: "invalid parameters"
+          404:
+            description: "user Id not found"
+          403:
+            description: "accesstoken is expired or wrong"
+          200:
+            description: "view either one of the default collection [style or items]"
+        parameters:
+          -
+            $ref: "#/parameters/version"
+          -
+            $ref: "#/parameters/brand"
+          -
+            $ref: "#/parameters/region"
+          -
+            $ref: "#/parameters/accesstoken"
+          -
+            $ref: "#/parameters/storeId"
+          -
+            $ref: "#/parameters/type"
+          -
+            $ref: "#/parameters/clientid"
+          -
+            $ref: "#/parameters/clientsecret"
+          -
+            $ref: "#/parameters/callback"
+          -
+            $ref: "#/parameters/locale"
 
 
                   #TODO: search

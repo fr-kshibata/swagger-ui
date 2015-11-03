@@ -41,7 +41,12 @@
       type: "string"
       required: true
       default: "11111"
-
+    store_id:
+      in: "path"
+      name: "store_id"
+      description: "store identifier"
+      required: true
+      default: "10101064"
     checkType:
       name: "checkType"
       description: "outputs true if the types are the same and false if not"
@@ -932,7 +937,7 @@
               $ref: "#/parameters/offset"
             -
               $ref: "#/parameters/limit"
-
-                  #TODO: search
-                  #TODO: ranking
-                  #TODO: External API
+  
+                      #TODO: search
+                      #TODO: ranking
+                      #TODO: External API
