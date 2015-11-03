@@ -931,6 +931,38 @@
               $ref: "#/parameters/offset"
             -
               $ref: "#/parameters/limit"
+    /collection/{version}/{brand}/{region}/collection/store/{store_id}:
+      get:
+          tags: ["List","Store"]
+          responses:
+            400:
+              description: "invalid parameters"
+            404:
+              description: "user Id not found"
+            403:
+              description: "accesstoken is expired or wrong"
+            200:
+              description: "collection single item details"
+          parameters:
+            -
+              $ref: "#/parameters/version"
+            -
+              $ref: "#/parameters/brand"
+            -
+              $ref: "#/parameters/region"
+            -
+              $ref: "#/parameters/accesstoken"
+            -
+              $ref: "#/parameters/skuid"
+            -
+              $ref: "#/parameters/clientid"
+            -
+              $ref: "#/parameters/clientsecret"
+            -
+              $ref: "#/parameters/callback"
+            -
+              $ref: "#/parameters/locale"
+
 
                   #TODO: search
                   #TODO: ranking
