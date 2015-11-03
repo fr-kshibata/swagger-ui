@@ -1,0 +1,95 @@
+---
+  swagger: "2.0"
+  info:
+    version: "v1"
+    title: "Store Locator"
+    description: "Unavailable"
+    contact:
+      name: "Mapion Team"
+      url: "http://www.mapion.co.jp/"
+  host: "store.fastretailing.com"
+  # basePath: "/collection"
+  schemes:
+    - "http"
+  consumes:
+    - "application/json"
+  produces:
+    - "application/json"
+  parameters:
+    r:
+      name: "r"
+      in: "query"
+      description: "identifier"
+      type: "string"
+      required: true
+      default: "sample"
+    store_id:
+      name: "store_id"
+      in: "query"
+      description: "store identifier"
+      type: "string"
+      required: false
+      default: "10101064"
+    version:
+      name: "version"
+      in: "path"
+      type: "string"
+      required: true
+      default: "100"
+    region:
+      name: "region"
+      in: "path"
+      type: "string"
+      required: true
+      default: "jp"
+    brand:
+      name: "brand"
+      in: "path"
+      type: "string"
+      required: true
+      default: uniqlo
+      enum:
+        - "uniqlo"
+        - "gu"
+  paths:
+    /api/{region}/{brand}/{version}/getStoreList.json:
+      description: "displays a list of store other query parameters are required the author is too lazy to include these"
+      get:
+        tags: ["List"]
+        responses:
+          200:
+            description: "Listed all stores described in the parameters"
+          404:
+            description: "Bad parameters"
+        parameters:
+          -
+            $ref: "#/parameters/region"
+          -
+            $ref: "#/parameters/brand"
+          -
+            $ref: "#/parameters/version"
+          -
+            $ref: "#/parameters/r"
+          -
+            $ref: "#/parameters/store_id"
+
+    /api/{region}/{brand}/{version}/getStoreDetail.json:
+      description: "displays one store"
+      get:
+        tags: ["List"]
+        responses:
+          200:
+            description: "Listed all stores described in the parameters"
+          404:
+            description: "Bad parameters"
+        parameters:
+          -
+            $ref: "#/parameters/region"
+          -
+            $ref: "#/parameters/brand"
+          -
+            $ref: "#/parameters/version"
+          -
+            $ref: "#/parameters/r"
+          -
+            $ref: "#/parameters/store_id"
