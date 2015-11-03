@@ -997,8 +997,8 @@
     #         -
     #           $ref: "#/parameters/locale"
     /{version}/{brand}/{region}/collection/store/{store_id}:
-      get:
-        tags: ["Store","GET","List"]
+      post:
+        tags: ["Store","POST","List"]
         responses:
           400:
             description: "invalid parameters"
