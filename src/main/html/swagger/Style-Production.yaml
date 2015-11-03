@@ -1,0 +1,96 @@
+---
+  swagger: "2.0"
+  info:
+    version: "v1"
+    title: "Style API"
+    description: "Made maybe after 1 or 2 years after development (not very accurrate)"
+    contact:
+      name: "Kenichi Shibata"
+  host: "style.uniqlo.com"
+  # basePath: "/collection"
+  schemes:
+    - "http"
+  consumes:
+    - "application/json"
+  produces:
+    - "application/json"
+  parameters:
+    itemcode:
+      name: "item_code"
+      in: "query"
+      description: "item identifier"
+      type: "string"
+      required: false
+      default: "139874"
+    callback:
+      name: "callback"
+      in: "query"
+      description: "callback identifier"
+      type: "string"
+      required: false
+      default: "somefunction"
+    version:
+      name: "version"
+      in: "path"
+      type: "string"
+      required: true
+      default: "v0"
+    locale:
+      name: "locale"
+      in: "query"
+      type: "string"
+      required: false
+      default: "jp"
+    limit:
+      name: "limit"
+      in: "query"
+      type: "number"
+      required: false
+      default: -1
+    styleId:
+      name: "styleId"
+      in: "query"
+      type: "string"
+      required: false
+      default: "7182"
+
+  paths:
+    /api/{version}/styleDetail.json:
+      description: "displays a list of store other query parameters are required the author is too lazy to include these"
+      get:
+        tags: ["List"]
+        responses:
+          200:
+            description: "Listed all stores described in the parameters"
+          404:
+            description: "Bad parameters"
+        parameters:
+          -
+            $ref: "#/parameters/version"
+          -
+            $ref: "#/parameters/locale"
+          -
+            $ref: "#/parameters/limit"
+          -
+            $ref: "#/parameters/styleId"
+
+    /api/{version}/searchItemCode.json:
+      description: "displays one store"
+      get:
+        tags: ["List"]
+        responses:
+          200:
+            description: "Listed all stores described in the parameters"
+          404:
+            description: "Bad parameters"
+        parameters:
+          -
+            $ref: "#/parameters/limit"
+          -
+            $ref: "#/parameters/locale"
+          -
+            $ref: "#/parameters/version"
+          -
+            $ref: "#/parameters/itemcode"
+          -
+            $ref: "#/parameters/callback"
